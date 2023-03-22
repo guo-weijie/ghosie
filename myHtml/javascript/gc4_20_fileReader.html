@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文件拖拽上传和 FileReader 测试</title>
+  <style>
+    /* 跟随系统主题切换 */
+    /* :root {
+      --borderColor: lightblue;
+      --color: #333;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --borderColor: lightyellow;
+        --color: #ccc;
+        --bgColor: #333;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --borderColor: lightblue;
+        --color: #333;
+        --bgColor: #fff;
+      }
+    } */
+
+    /* 手动主题切换 */
+    :root[data-theme='light'] {
+      --borderColor: lightblue;
+      --color: #333;
+      --bgColor: #fff;
+    }
+
+    :root[data-theme='dark'] {
+      --borderColor: lightyellow;
+      --color: #ccc;
+      --bgColor: #333;
+    }
+
+    body {
+      color: var(--color);
+      background-color: var(--bgColor);
+      transition: all 300ms;
+    }
+
+    .box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn button {
+      color: var(--color);
+      padding: 10px 16px;
+      font-size: 16px;
+      border: 1px solid var(--borderColor);
+      border-radius: 5px;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 300ms;
+    }
+
+    .btn button:hover {
+      background-color: var(--borderColor);
+      border-color: var(--color);
+    }
+
+    .fileInput {
+      width: 200px;
+      height: 200px;
+      line-height: 200px;
+      border: 1px solid var(--borderColor);
+      text-align: center;
+    }
+
+    .mb {
+      margin-bottom: 20px;
+    }
+
+    img {
+      height: 250px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div id="fileInput" class="fileInput mb">
+      <input type="file" id="fileList" placeholder="选择文件" accept="image/*, .txt">
+    </div>
+    <div class="btn">
+      <button>浅色</button>
+    </div>
+  </div>
+
+  <div class="mb">
+    <label for="progress">读取进度：</label>
+    <progress id="progress" max="100" value="0"></progress>
+  </div>
+
+  <div class="mb">
+    <label for="imgBox">选择的图片放这里</label>
+    <div id="imgBox"></div>
+  </div>
+
+  <div class="mb">
+    <label for="textBox">选择的文本放这里</label>
+    <div id="textBox"></div>
+  </div>
+
+  <script>
+    const fileList = document.querySelector('#fileList')
+    const progress = document.querySelector('#progress')
+    const imgBox = document.querySelector('#imgBox')
+    const textBox = document.querySelector('#textBox')
+    const btn = document.querySelector('button')
+    const root = document.documentElement
+    const fileDrag = document.querySelector('#fileInput')
+
+    const theme = window.matchMedia('(prefers-color-scheme: dark)')
+    root.setAttribute('data-theme', theme.matches ? 'dark' : 'light')
+    btn.innerText = theme.matches ? '深色' : '浅色'
+
+    // 文件拖拽
+    fileDrag.addEventListener('dragenter', event => {
+      event.preventDefault()
+    })
+    fileDrag.addEventListener('dragover', event => {
+      event.preventDefault()
+    })
+    fileDrag.addEventListener('drop', event => {
+      event.preventDefault()
+      const files = event.dataTransfer.files
+
+      const length = files.length
+
+      for (let index = 0; index < length; index++) {
+        progress.value = 0
+        readerFile(files[index])
+      }
+    })
+
+    // 选取文件
+    fileList.addEventListener('change', (event) => {
+      const files = event.target.files
+
+      if (files.length === 0) {
+        window.alert('取消操作')
+        return
+      }
+
+      const length = files.length
+
+      for (let index = 0; index < length; index++) {
+        progress.value = 0
+        readerFile(files[index])
+      }
+    })
+
+    const errorCode = ['未找到文件', '安全错误', '读取被中断', '文件不可读', '编码错误']
+
+    // 文件读取处理
+    function readerFile(file) {
+      const reader = new FileReader
+      const type = /image/.test(file.type) ? 'image' : 'text'
+
+      if (type === 'image') {
+        reader.readAsDataURL(file)
+      } else {
+        reader.readAsText(file)
+      }
+
+      reader.onerror = function () {
+        alert(errorCode[reader.error.code])
+      }
+      reader.onprogress = function (event) {
+        const { loaded, total } = event
+        progress.value = Math.round(loaded * 100 / total)
+      }
+      reader.onload = function () {
+        progress.value = 100
+        if (type === 'image') {
+          const img = document.createElement('img')
+          img.src = reader.result
+          imgBox.appendChild(img)
+        } else {
+          const span = document.createElement('div')
+          span.innerText = reader.result
+          textBox.appendChild(span)
+        }
+      }
+    }
+
+    // 跟随系统主题切换
+    btn.addEventListener('click', function () {
+      this.innerText = this.innerText === '浅色' ? '深色' : "浅色"
+      root.dataset.theme = this.innerText === '浅色' ? 'light' : 'dark'
+    })
+
+    theme.addListener(e => {
+      if (e.matches) {
+        btn.innerText = '浅色'
+      } else {
+        btn.innerText = '深色'
+      }
+    })
+  </script>
+</body>
+
+</html>

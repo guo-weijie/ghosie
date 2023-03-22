@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dataTransfer 方法</title>
+  <style>
+    .box {
+      width: 100%;
+      height: 500px;
+      display: flex;
+    }
+
+    .box div {
+      width: 50%;
+      height: 100%;
+    }
+
+    .box1 {
+      background-color: lightgreen;
+    }
+
+    .box2 {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="box1">把我拖到右边</div>
+    <!-- <input type="text" class="box1" value="把我拖到右边"> -->
+    <div class="box2">把左边的拖过来</div>
+  </div>
+
+  <script>
+    const box1 = document.querySelector('.box1');
+    const box2 = document.querySelector('.box2');
+
+    // setData 只在 dragstart 事件中能设置数据
+    box1.ondragstart = function (event) {
+      // 拖动 div 需手动设置内容
+      // 拖动 input 浏览器会自动调用 setData 方法把选中的文本以 text 格式存储起来
+      event.dataTransfer.setData('text', '你看到的并非是真实的')
+    }
+    box1.ondragend = function (event) {
+
+    }
+    box1.ondrag = function (event) {
+
+    }
+    box2.ondragenter = function (event) {
+      event.preventDefault()
+    }
+    box2.ondragover = function (event) {
+      event.preventDefault()
+    }
+    box2.ondrop = function (event) {
+      event.preventDefault()
+      const text = event.dataTransfer.getData('text')
+      this.innerText = text
+    }
+  </script>
+</body>
+
+</html>

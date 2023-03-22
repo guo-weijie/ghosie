@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Ghosie的博客 - 记录学习的技能和遇到的问题</title><meta name="keywords" content="javascript,vue,css,html,阅读，生活"><meta name="author" content="郭伟杰"><meta name="copyright" content="郭伟杰"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="html5,css3,javascript,vue3 学习笔记，阅读心得，生活感悟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ghosie的博客">
+<meta property="og:url" content="https://keep-silence.com/page/4/index.html">
+<meta property="og:site_name" content="Ghosie的博客">
+<meta property="og:description" content="html5,css3,javascript,vue3 学习笔记，阅读心得，生活感悟">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://keep-silence.com/img/avatar.jpg">
+<meta property="article:author" content="郭伟杰">
+<meta property="article:tag" content="javascript,vue,css,html,阅读，生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://keep-silence.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://keep-silence.com/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ghosie的博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-17 20:32:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/home_page.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ghosie的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Ghosie的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/guo-weijie" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:weijie.g@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/vue/vueLeakFilling/" title="vue知识点查漏补缺"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://edge-labo.com/wp-content/uploads/2021/09/image1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue知识点查漏补缺"></a></div><div class="recent-post-info"><a class="article-title" href="/vue/vueLeakFilling/" title="vue知识点查漏补缺">vue知识点查漏补缺</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-16T01:27:18.000Z" title="发表于 2021-06-16 09:27:18">2021-06-16</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-16T01:58:44.000Z" title="更新于 2021-11-16 09:58:44">2021-11-16</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/vue/">vue</a></span></div><div class="content">
+未做特殊说明的，全部都默认为vue3
+
+指令动态参数可以在指令参数中使用 JavaScript 表达式，方法是用方括号括起来：
+1&lt;a v-bind:[attributeName&#x3D;&#39;cur&#39;]&gt;...&lt;&#x2F;a&gt;
+如果组件实例有一个 data property attributeName，其值为 &quot;href&quot;，那么这个绑定将等价于 v-bind:href
+同样的，也可以使用动态参数作为一个动态的事件名绑定处理函数：
+1&lt;a v-on:[eventName]&#x3D;&#39;doSomething&#39;&gt;...&lt;&#x2F;a&gt;
+在这个示例中，当 eventName 的值为 focus 时，v-on:[eventName] 将等价于 v-on:focus
+缩写v-bind缩写
+12345678&lt;!-- 完整语法 --&gt;&lt;a v-bind:href&#x3D;&#39;url&#39;&gt;...&lt;&#x2F;a&gt;&lt;!-- 缩写 --&gt;& ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/others/mySoftware/" title="常用软件"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200228%2F4fae7694711a4ada9680f7bef4abee0a.png&amp;refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1639807171&amp;t=dfadfc86bf07dcc827682fa0f2a185f0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用软件"></a></div><div class="recent-post-info"><a class="article-title" href="/others/mySoftware/" title="常用软件">常用软件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-11T02:04:28.000Z" title="发表于 2021-06-11 10:04:28">2021-06-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-31T12:02:15.321Z" title="更新于 2022-10-31 20:02:15">2022-10-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">
+记录本人常用软件点击名称跳转到下载页面，有的会自动下载
+
+win327-ZipBing WallpaperGitGoogle ChromeInternet Download ManagerMicrosoft Visual Studio CodeMozilla FirefoxNode.jsPopPlayerSteamPostman微信开发者工具Office 2021 家庭和学生版（只有word、excel、ppt、oneNote）钉钉终端蓝湖Adobe Photoshop
+安卓阅读TVBox
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/others/electric/" title="电力相关知识"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.hanzi5.com/assets/bishun/animation/7535-bishun.gif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电力相关知识"></a></div><div class="recent-post-info"><a class="article-title" href="/others/electric/" title="电力相关知识">电力相关知识</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-04T02:06:47.000Z" title="发表于 2021-06-04 10:06:47">2021-06-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T02:45:58.839Z" title="更新于 2022-10-11 10:45:58">2022-10-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="content">电如何产生发电方式
+火力发电
+风力发电
+水力发电
+核能发电
+太阳能发电
+地热发电
+海洋能发电（按能量的存储形式可以分为）
+机械能
+潮汐能（海水涨潮和落潮时形成的水的势能和动能）
+海流能/潮流能（海水流动的动能，主要指海底水道和海峡中较为稳定的流动，以及由于潮汐导致的有规律的海水流动）
+波浪能（海洋表面波浪所具有的动能和势能）
+
+
+热能
+海水温差能（表层海水和深层海水之间水温之差的热能）
+
+
+化学能
+海水盐差能（海水和淡水之间或两种含盐浓度不同的海水之间的电位差能）
+
+
+
+
+
+火力发电机组示例
+电产生的方式
+电化学法
+静电
+磁感应
+压电效应
+热电效应
+光电效应
+热电子发射
+
+电力的分类
+交流电：强度与方向都随着时间做周期性变化（我国50Hz）
+直流电：电流方向不随着时间做周期性变化
+
+
+交流转直流叫整流，直流转交流为逆变
+
+电力系统的组成
+电力系统是指完成电能生产、输送、分配和消费的统一整体
+
+电力流通的过程：发电 –&gt; 输电 –&gt; 配电 –&gt; 用电
+电的基本参数基础知识电流：单位时间里通过导体任一横截面的电量叫做电流强度，简称电流。通常用字母I表示，单位是安培电压：单 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/vue/vue3/" title="vue3 学习笔记"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://edge-labo.com/wp-content/uploads/2021/09/image1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue3 学习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/vue/vue3/" title="vue3 学习笔记">vue3 学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-06-04T00:55:42.000Z" title="发表于 2021-06-04 08:55:42">2021-06-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-22T03:18:01.000Z" title="更新于 2021-11-22 11:18:01">2021-11-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/vue/">vue</a></span></div><div class="content">
+vue-cli 从 4.5.0 版本开始支持 vue3.0vue-router 从 4.0 版本开始支持 vue3.0vuex 从 4.0 版本开始支持 vue3.0。其API与3.x基本相同。唯一的突破性变化是插件的安装方式
+
+新增特性
+Composition（组合）API
+setup
+ref 和 reactive
+computed 和 watch
+新的生命周期函数
+provide 与 inject
+…
+
+
+新组件
+Fragment - 文档碎片
+Teleport - 瞬移组件的位置
+Suspense - 异步加载组件的 loading 界面
+
+
+其它 API 更新
+全局 API 的修改
+将原来的全局 API 转移到应用列表
+模板语法变化
+
+
+
+小改动
+destroyed 生命周期选项被重命名为unmounted
+beforeDestroy 生命周期选项被重命名为beforeUnmount
+prop default 工厂函数不再有权访问this是上下文
+自定义指令API已更改为与组件生命周期一致
+data 应始终声明为函数
+来自 mixin 的 data 选项现在可简单地合并
+at ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/html/storage/" title="本地存储的日常应用"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.horadecodar.com.br/wp-content/uploads/2020/06/Projetos14-768x644.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本地存储的日常应用"></a></div><div class="recent-post-info"><a class="article-title" href="/html/storage/" title="本地存储的日常应用">本地存储的日常应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-21T12:29:47.000Z" title="发表于 2021-04-21 20:29:47">2021-04-21</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T02:39:29.261Z" title="更新于 2022-10-11 10:39:29">2022-10-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/html/">html</a></span></div><div class="content">sessionStorage在项目中的应用sessionSotrage:
+
+过期时间：会话结束时被清除。只对当前标签页有效，即使两个标签页打开的是同一个链接，sessionStorage也是相互隔离的
+存储大小：5MB。具体视浏览器而定，点击此处测试
+
+起因公司后台项目前端页面，需要用到标签页，当点击A标签页中的链接跳转页面再返回后，需要到B标签页，而点击B标签也中的链接跳转再回来后，要保持在B标签页中。如果从别的菜单回到当前菜单，要打开A标签页
+原来的解决方法将标签页值存入localStorage中，每次回来后读取localStorage中的值，有则使用，无则回A标签页。同时监听路由，判断是否跳出当前菜单，决定是否清空localStorage
+遇到的问题当用户直接关闭页面或浏览器时，状态来不及处理，会导致下一次打开时，使用到关闭之前的状态
+解决方法换成使用seeeionStorage，基于sessionStorage关闭标签或页面就清空的特性，可以保证每次打开都是A标签页，成功解决问题
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/gossip/superstition/" title="风俗见闻"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/lqh.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="风俗见闻"></a></div><div class="recent-post-info"><a class="article-title" href="/gossip/superstition/" title="风俗见闻">风俗见闻</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-14T14:19:25.000Z" title="发表于 2021-04-14 22:19:25">2021-04-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T02:40:22.467Z" title="更新于 2022-10-11 10:40:22">2022-10-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">普通民众中的风俗是很有意思的，虽然有的听起来很荒诞，但个中缘由也值得我们深思
+七上八下
+形容心里慌乱不安，无所适从
+
+因七’上’八’下’，故当地人认为七好八不好，此说法见于山东青岛
+鸡飞狗跳
+把鸡吓得飞起来，把狗吓得到处乱跳，形容惊慌得乱成一团
+
+因此词里有鸡和狗，所以办红事时属鸡和属狗的不能见面，此说法见于山西长治
+棺材不能摆正土葬坟里摆棺材，不能摆正，要稍微歪一点，怕子孙受不住。个人猜测是类似于人不能在身上纹关公一个道理。此说法见于山西长治
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/hello-world/" title="我的个人博客"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tse2-mm.cn.bing.net/th/id/OIP-C.oJhIk6rqwTr2inf7MI5HJgHaHa?pid=ImgDet&amp;rs=1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="我的个人博客"></a></div><div class="recent-post-info"><a class="article-title" href="/hello-world/" title="我的个人博客">我的个人博客</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-11T08:03:09.000Z" title="发表于 2021-04-11 16:03:09">2021-04-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-10T03:08:38.969Z" title="更新于 2022-10-10 11:08:38">2022-10-10</time></span></div><div class="content">兜兜转转又重新开始了，希望这次能坚持下去吧！主要记录自己的学习笔记、阅读感悟和生活见闻
+新建文章12345$ hexo new &quot;My New Post&quot;# 新文章生成在指定目录$ hexo new title --path folder/fileName# 以上命令 会在 _posts 下生成 folder 文件夹，此文件夹内有 fileName.md 文件，文件的 title 为 title
+
+更多信息: Writing
+启动本地服务1hexo server
+
+更多信息: Server
+生成静态文件1hexo generate
+
+更多信息: Generating
+部署站点1hexo deploy
+
+更多信息: Deployment
+生成草稿1hexo new draft newpage
+
+预览草稿1hexo server --draft
+
+将操作发布（即发表到post中）1hexo publish draft newpage
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/gossip/novel/" title="灭蚊小记"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img1.doubanio.com/lpic/s27174397.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="灭蚊小记"></a></div><div class="recent-post-info"><a class="article-title" href="/gossip/novel/" title="灭蚊小记">灭蚊小记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2014-09-27T18:28:47.000Z" title="发表于 2014-09-28 02:28:47">2014-09-28</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-11T02:40:14.878Z" title="更新于 2022-10-11 10:40:14">2022-10-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">轻云蔽月，灯火齐喑。唰唰黑影闪过。“不好”待发觉时已被包围，心中不禁叫苦，今晚忒也大意了。定睛一看，只见四个“刺客”环立四方，这四人：身姿袅娜羞飞燕，面容粗鄙笑东施。造化如何生此物，定是上帝手抖时。“兀那东西，快……”不容分说，那四刺客已攻近身来。此辈皆是轻功绝佳之士，腾挪闪躲，俱臻化境；捏刺拿抓，尽属上乘。两招刚过，吾已只剩招架之功、而毫无还手之力了。突然，手背后溪、肘部小海、肩部秉风三穴一阵刺痛，已中了敌人的兵器，说来也怪，刺痛过后三穴只是麻痒难当，并无中毒迹象。即中了别人兵刃，我那无名火起，俗语云：怒从心头起，恶向胆边生。怒发冲冠，三军僻易。我一个鲤鱼打挺，直起身来，或掌、或抓。掌是那黯然掌、降龙掌，掌到处，开碑裂石；抓是那虎爪、鹰爪和龙爪，爪着的，肚破肠流。奈何！奈何！天下武功，唯快不破。纵使尽千般解数，哪碰得敌人分毫。
+正自彷徨无措之际，想起日前于陶朱婆处易得的酥骨夺魂香。忍着后背剧痛，袅袅青烟起，正是：人醉骨酥飘飘去，从此他乡成故乡。
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/gossip/babble/" title="呓语"><img class="post_bg" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/babble_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="呓语"></a></div><div class="recent-post-info"><a class="article-title" href="/gossip/babble/" title="呓语">呓语</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="1234-05-05T23:08:09.000Z" title="发表于 1234-05-06 07:08:09">1234-05-06</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T11:48:10.636Z" title="更新于 2023-03-13 19:48:10">2023-03-13</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a></span></div><div class="content">
+我向来有发癔症的毛病，以下都是发癔症时的胡言乱语，切勿当真！如引起不适，请点击浏览器右上角 X 号
+
+
+小时候看鲁迅先生的文章，看的痛心疾首。现在想想，人未必就冷漠，只是环境所迫而已
+
+你说我差，你咋不说隔壁那个更差的呢！你肯定是拿了隔壁的好处了，来这里污蔑我
+
+因为不一样，所以叫特色
+那究竟哪些是特色呢？
+我比他好的都是特色
+那不好的呢？
+摸着石头过河，在所难免
+
+躺平的好处：
+  1、缩小贫富差距
+
+富人靠剥削韭菜发家致富，韭菜越努力，富人赚的越多。所以，韭菜躺的越平，富人赚的越少，贫富差距也就越小，更利于构建和谐社会
+
+  2、缓解韭菜短缺问题
+
+韭菜躺平，有利于生理和心理健康，间接提高了生命长度，韭菜平均寿命延长后，可以适当的延长韭菜的退休时间，解决劳动力问题
+
+  3、增强政府自信心和人民凝聚力
+
+贫富差距小、平均寿命长、劳动力充足，向世界展示了一个幸福强大的中国，体现了特色社会主义的先进性和优越性，有效增强了政府自信心和人民凝聚力
+
+
+上行下效
+
+鼓励违法
+
+集中力量干大事
+
+好处：
+1、鼓舞民心
+2、增强自信
+3、展现优越性
+4、解决问题
+5、捞一笔
+
+
+坏处：
+1、小 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郭伟杰</div><div class="author-info__description">尽吾志也而不能至者，可以无悔矣</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/guo-weijie"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/guo-weijie" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:weijie.g@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">少壮不努力，老大徒伤悲 <br /> 君何必言利，亦有仁义焉 <br /> 一切古代史都是当代史 <br /> 每天进步一点点</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/javascript/array/" title="Array 常用方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Array 常用方法"/></a><div class="content"><a class="title" href="/javascript/array/" title="Array 常用方法">Array 常用方法</a><time datetime="2023-03-13T12:20:11.320Z" title="更新于 2023-03-13 20:20:11">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/babble/" title="呓语"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/babble_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="呓语"/></a><div class="content"><a class="title" href="/gossip/babble/" title="呓语">呓语</a><time datetime="2023-03-13T11:48:10.636Z" title="更新于 2023-03-13 19:48:10">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/xm1014/" title="XM1014"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XM1014"/></a><div class="content"><a class="title" href="/gossip/xm1014/" title="XM1014">XM1014</a><time datetime="2023-02-19T04:21:11.129Z" title="更新于 2023-02-19 12:21:11">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十一章 Promise 与异步函数"/></a><div class="content"><a class="title" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数">第十一章 Promise 与异步函数</a><time datetime="2022-12-01T03:28:18.389Z" title="更新于 2022-12-01 11:28:18">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二十章 JavaScript API"/></a><div class="content"><a class="title" href="/javascript/gc4-20/" title="第二十章 JavaScript API">第二十章 JavaScript API</a><time datetime="2022-11-25T07:03:09.639Z" title="更新于 2022-11-25 15:03:09">2022-11-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/css/"><span class="card-category-list-name">css</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/html/"><span class="card-category-list-name">html</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/javascript/"><span class="card-category-list-name">javascript</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/vue/"><span class="card-category-list-name">vue</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%85%B6%E4%BB%96/"><span class="card-category-list-name">其他</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%9D%82%E8%B0%88/"><span class="card-category-list-name">杂谈</span><span class="card-category-list-count">8</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Sass/" style="font-size: 1.1em; color: #999">Sass</a> <a href="/tags/Scss/" style="font-size: 1.1em; color: #999">Scss</a> <a href="/tags/android/" style="font-size: 1.1em; color: #999">android</a> <a href="/tags/bug/" style="font-size: 1.1em; color: #999">bug</a> <a href="/tags/css/" style="font-size: 1.33em; color: #99a2af">css</a> <a href="/tags/css3/" style="font-size: 1.27em; color: #99a0a9">css3</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/grid/" style="font-size: 1.1em; color: #999">grid</a> <a href="/tags/html/" style="font-size: 1.16em; color: #999b9e">html</a> <a href="/tags/html5/" style="font-size: 1.16em; color: #999b9e">html5</a> <a href="/tags/javascript/" style="font-size: 1.5em; color: #99a9bf">javascript</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a> <a href="/tags/localStorage/" style="font-size: 1.1em; color: #999">localStorage</a> <a href="/tags/nodejs/" style="font-size: 1.1em; color: #999">nodejs</a> <a href="/tags/npm/" style="font-size: 1.16em; color: #999b9e">npm</a> <a href="/tags/nth/" style="font-size: 1.1em; color: #999">nth</a> <a href="/tags/sessionStorage/" style="font-size: 1.1em; color: #999">sessionStorage</a> <a href="/tags/svg/" style="font-size: 1.1em; color: #999">svg</a> <a href="/tags/uniapp/" style="font-size: 1.1em; color: #999">uniapp</a> <a href="/tags/vue/" style="font-size: 1.16em; color: #999b9e">vue</a> <a href="/tags/vue3-0/" style="font-size: 1.1em; color: #999">vue3.0</a> <a href="/tags/windows/" style="font-size: 1.16em; color: #999b9e">windows</a> <a href="/tags/%E4%BC%A0%E7%BB%9F%E6%96%87%E5%8C%96/" style="font-size: 1.21em; color: #999ea4">传统文化</a> <a href="/tags/%E5%8D%A1%E9%A1%BF/" style="font-size: 1.1em; color: #999">卡顿</a> <a href="/tags/%E5%96%B7%E5%AD%90/" style="font-size: 1.1em; color: #999">喷子</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 1.1em; color: #999">小程序</a> <a href="/tags/%E6%B1%9F%E6%B9%96/" style="font-size: 1.16em; color: #999b9e">江湖</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.39em; color: #99a4b4">生活</a> <a href="/tags/%E7%94%B5%E5%8A%9B/" style="font-size: 1.1em; color: #999">电力</a> <a href="/tags/%E7%94%B5%E8%83%BD%E9%87%8F%E8%AE%A1%E9%87%8F/" style="font-size: 1.1em; color: #999">电能量计量</a> <a href="/tags/%E7%A5%9E%E7%A7%98/" style="font-size: 1.1em; color: #999">神秘</a> <a href="/tags/%E8%B6%85%E8%87%AA%E7%84%B6/" style="font-size: 1.1em; color: #999">超自然</a> <a href="/tags/%E8%BF%B7%E4%BF%A1/" style="font-size: 1.16em; color: #999b9e">迷信</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.16em; color: #999b9e">随笔</a> <a href="/tags/%E9%A3%8E%E4%BF%97/" style="font-size: 1.1em; color: #999">风俗</a> <a href="/tags/%E9%AB%98%E7%A8%8B4%E7%AC%94%E8%AE%B0/" style="font-size: 1.44em; color: #99a7ba">高程4笔记</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">三月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">一月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">十二月 2021</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-03-17T12:32:15.020Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郭伟杰</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href='https://cn.keep-silence.com'>国内访问</a>  <a href='https://keep-silence.com'>国外访问</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://fastly.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function subtitleType () {
+  getScript('https://sdk.jinrishici.com/v2/browser/jinrishici.js').then(() => {
+    jinrishici.load(result =>{
+      if (true) {
+        const sub = []
+        const content = result.data.content
+        sub.unshift(content)
+        window.typed = new Typed('#subtitle', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: false,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('subtitle').innerHTML = result.data.content
+      }
+    })
+  })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://fastly.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

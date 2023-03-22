@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第三章 语言基础 | Ghosie的博客</title><meta name="keywords" content="javascript,高程4笔记"><meta name="author" content="郭伟杰"><meta name="copyright" content="郭伟杰"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据类型及转换为什么let声明的变量会出现暂时性死区问题 使用 var 声明变量时，由于声明会被提升，javascript 引擎会自动将多余的声明在作用域顶部合并为一个声明。因为 let 的作用域是块，所以不可能检查前面是否已经使用 let 声明过同名变量，同时也就不能在没有声明的情况下使用它  typeof typeof是一个操作符而不是函数，所以不需要传参（但可以使用参数）  123let m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 语言基础">
+<meta property="og:url" content="https://keep-silence.com/javascript/gc4-3/index.html">
+<meta property="og:site_name" content="Ghosie的博客">
+<meta property="og:description" content="数据类型及转换为什么let声明的变量会出现暂时性死区问题 使用 var 声明变量时，由于声明会被提升，javascript 引擎会自动将多余的声明在作用域顶部合并为一个声明。因为 let 的作用域是块，所以不可能检查前面是否已经使用 let 声明过同名变量，同时也就不能在没有声明的情况下使用它  typeof typeof是一个操作符而不是函数，所以不需要传参（但可以使用参数）  123let m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&rs=1">
+<meta property="article:published_time" content="2021-12-15T06:56:53.000Z">
+<meta property="article:modified_time" content="2022-10-17T07:05:44.220Z">
+<meta property="article:author" content="郭伟杰">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="高程4笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&rs=1"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://keep-silence.com/javascript/gc4-3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第三章 语言基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-17 15:05:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.php.cn/upload/article/202012/07/2020120713530074737.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ghosie的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第三章 语言基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-15T06:56:53.000Z" title="发表于 2021-12-15 14:56:53">2021-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-17T07:05:44.220Z" title="更新于 2022-10-17 15:05:44">2022-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第三章 语言基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="数据类型及转换"><a href="#数据类型及转换" class="headerlink" title="数据类型及转换"></a>数据类型及转换</h2><h3 id="为什么let声明的变量会出现暂时性死区问题"><a href="#为什么let声明的变量会出现暂时性死区问题" class="headerlink" title="为什么let声明的变量会出现暂时性死区问题"></a>为什么let声明的变量会出现<code>暂时性死区</code>问题</h3><blockquote>
+<p>使用 <code>var</code> 声明变量时，由于声明会被提升，javascript 引擎会自动将多余的声明在作用域顶部合并为一个声明。因为 <code>let</code> 的作用域是块，所以不可能检查前面是否已经使用 <code>let</code> 声明过同名变量，同时也就不能在没有声明的情况下使用它</p>
+</blockquote>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><blockquote>
+<p><code>typeof</code>是一个操作符而不是函数，所以不需要传参（但可以使用参数）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> msg=<span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> msg; <span class="comment">//-&gt; &#x27;string&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span>(mgs); <span class="comment">//-&gt; &#x27;string&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>即使变量未声明，也可以执行typeof操作，且只能执行这个有用的操作，返回结果是<code>&#39;undefined&#39;</code></p>
+</blockquote>
+<h3 id="null"><a href="#null" class="headerlink" title="null"></a>null</h3><blockquote>
+<p>任何时候，只要变量要保存对象，而当时又没有那个对象可保存，就要用null来填充该变量。这样就可以保持null是空对象指针的语义，并进一步将其与undefined区分开来  —–高程4 57页</p>
+</blockquote>
+<h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3><blockquote>
+<p>Number类型使用了 IEEE754 格式表示整数和浮点数（在某些语言中也叫双精度值）<br>ECMAScript2015或ES6中的八进制值通过前缀0o来表示。严格模式下，如果使用前缀0来表示八进制的话，会被视为语法错误<br>存储浮点值使用的内存空间是存储整数值的两倍</p>
+</blockquote>
+<p>在浏览器控制台，二进制以 0B 开头，八进制以 0 或者 0O 开头，十六进制以 0x 开头</p>
+<p>数值转换（<code>Number()</code>）</p>
+<ul>
+<li>布尔值，true 转换为1，false 转换为0</li>
+<li>数值，直接返回</li>
+<li>null，返回0</li>
+<li>undefined，返回NaN</li>
+<li>字符串，应用以下规则：<ul>
+<li>如果字符串包含数值字符，包括数值字符前面带加、减号的情况，则转换为一个十进制值</li>
+<li>如果字符串包含有效的浮点值格式如 “1.1”，则会转换为相应的浮点值</li>
+<li>如果字符串包含有效的十六进制格式如 “0xf”，则会转换为与该十六进制值对应的十进制整数值</li>
+<li>如果是空字符串（不包含字符），则返回 0</li>
+<li>如果字符串包含除上述情况之外的其他字符，则返回 NaN</li>
+</ul>
+</li>
+<li>对象，调用 valueOf() 方法，并按照上述规则转换返回的值。如果转换结果不是数字 ，则调用toString() 方法，再按照转换字符串的规则转换</li>
+</ul>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>字符字面量</p>
+<table>
+<thead>
+<tr>
+<th align="center">字面量</th>
+<th align="center">含义</th>
+<th align="center">英语单词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\n</td>
+<td align="center">换行</td>
+<td align="center">newline</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td align="center">制表</td>
+<td align="center">tab</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="center">退格</td>
+<td align="center">backspace</td>
+</tr>
+<tr>
+<td align="center">\r</td>
+<td align="center">回车</td>
+<td align="center">Enter(windows) return(Mac)</td>
+</tr>
+<tr>
+<td align="center">\f</td>
+<td align="center">换页</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">\</td>
+<td align="center">反斜杠()</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">&#39;</td>
+<td align="center">单引号(‘),在字符串以单引号标示时使用，例如’He said,&#39;hey.&#39;‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">&quot;</td>
+<td align="center">双引号(“),在字符串以双引号标示时使用，例如”He said,&quot;hey.&quot;“</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">`</td>
+<td align="center">反引号(`),在字符串以反引号标示时使用，例如<code>He said,\</code>hey.``</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">\xnn</td>
+<td align="center">以十六进制编码nn表示的字符(其中n是十六进制数字0~F),例如\x41 等于“A”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">\unnnn</td>
+<td align="center">以十六进制编码nnnn表示的unicode字符(其中n是十六进制数字0~F),例如\u03a3 等于希腊字符“∑”</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>字符字面量可以出现在字符串中的任意位置，且可以作为单个字符被解释</p>
+</blockquote>
+<p>转换为字符串</p>
+<ul>
+<li>toString()：该方法可见于数值、布尔值、对象和字符串值<ul>
+<li>字符串值使用该方法是只是简单的返回自身的一个副本</li>
+<li>null 和 undefined 值没有 toString() 方法，转换需要使用 String() 方法</li>
+<li>多数情况下，toString() 不接受任何参数。但是在对数值调用这个方法时，toString() 可以接收一个底数参数，即以什么底数参数来输出数值的字符串值。默认情况下，toString() 返回数值的十进制字符串表示，通过传入参数，可以得到数值的二进制、八进制、十六进制或其他任何有效基数的字符串表示</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num.toString())  <span class="comment">//-&gt; &#x27;10&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">2</span>)) <span class="comment">//-&gt; &#x27;1010&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">8</span>))  <span class="comment">//-&gt; &#x27;12&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">10</span>))  <span class="comment">//-&gt; &#x27;10&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">16</span>))  <span class="comment">//-&gt; &#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>String()：函数遵循以下规则：<ul>
+<li>如果值有 toString() 方法，则调用该方法（不传参数）</li>
+<li>如果值是 null，返回 ‘null’</li>
+<li>如果值是 undefined，返回 ‘undefined’</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>扩展<br>String.raw：获取原始的模板字面量内容（如换行符或 Unicode 字符）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">`\u00A9`</span>)  <span class="comment">//-&gt; ©</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.raw<span class="string">`\u00A9`</span>)  <span class="comment">//-&gt; \u00A9</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>Symbol（符号）是 ES6 新增的数据类型。符号是<code>原始值</code>，且符号实例是唯一、不可变的。符号的用途是<code>确保对象属性使用唯一标识符，不会发生属性冲突的危险</code></p>
+<p>调用 Symbol() 函数时，也可以传入一个字符串参数作为对符号的描述，但是这个字符串参数与符号定义或标识完全无关，仅是方便调试代码</p>
+<p>Symbol() 函数不能与 new 关键字一起作为构造函数使用。这样做是为了避免创建符号包装对象</p>
+<h4 id="全局符号注册表"><a href="#全局符号注册表" class="headerlink" title="全局符号注册表"></a>全局符号注册表</h4><p>Symbol.for()</p>
+<blockquote>
+<p>对每个字符串键都执行幂等操作。第一次使用某个字符串调用时，他会检查全局运行时注册表，发现不存在对应的符号，就会生成一个新符号实例并添加到注册表中。后续使用相同字符串的调用同样会检查注册表，发现存在与该字符串对应的符号，就会返回该符号的实例</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> otherFoo = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line">foo === otherFoo  <span class="comment">//-&gt; true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 即使使用相同的符号描述，在全局注册表中定义的符号跟使用 Symbol() 定义的符号也不等同</span></span><br><span class="line"><span class="keyword">let</span> one = <span class="built_in">Symbol</span>(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> two = <span class="built_in">Symbol</span>.for(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line">one === two  <span class="comment">//-&gt; false</span></span><br></pre></td></tr></table></figure>
+
+<p>全局注册表中的符号必须使用字符串键来创建，作为参数传给 Symbol.for() 的任何值都会被转换为字符串</p>
+<p>Symbol.keyFor()</p>
+<blockquote>
+<p>用来查询 <code>全局注册表</code>。该方法接收符号，返回该全局符号对应的字符串键。如果查询的不是全局符号，则返回 undefined</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建全局符号</span></span><br><span class="line"><span class="keyword">let</span> aaa = <span class="built_in">Symbol</span>.for([<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(aaa)  <span class="comment">//-&gt; &#x27;1,2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建普通符号</span></span><br><span class="line"><span class="keyword">let</span> bbb = <span class="built_in">Symbol</span>(<span class="string">&#x27;bar&#x27;</span>)</span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(bbb)  <span class="comment">//-&gt; undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果传的不是符号，则抛出 TypeError 错误</span></span><br><span class="line"><span class="built_in">Symbol</span>.keyFor(<span class="number">1123</span>) <span class="comment">//-&gt; TypeError: 1123 is not a symbol</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>Object 是派生其他对象的基类。Object 类型的所有属性和方法在派生的对象上同样存在。每个Object 实例都有如下属性和方法：</p>
+<ul>
+<li>constructor: 用于创建当前对象的函数。</li>
+<li>hasOwnProperty(属性名)：用于判断当前对象实例（非原型）上是否存在给定的属性。要检查的属性名必须是字符串或符号</li>
+<li>isPrototypeOf(object)：用于判断当前对象是否存在于另一个对象的原型链上</li>
+<li>propertyIsEnumerable(属性名)：用于判断给定的属性是否可以使用 for-in 语句枚举。属性名必须是字符串</li>
+<li>toLocalString()：返回对象的字符串表示，该字符串反映对象所在的本地化执行环境</li>
+<li>toString()：返回对象的字符串表示</li>
+<li>valueOf()：返回对象对应的字符串、数值或布尔值表示。通常与 toString() 的返回值相同</li>
+</ul>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3><blockquote>
+<p>只操作一个值的操作符叫<code>一元操作符</code></p>
+</blockquote>
+<p><strong>递增/递减操作符</strong><br>前缀版：变量的值会在语句被求值之前改变（在计算机科学中，这通常被称为具有副作用）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age = <span class="number">29</span></span><br><span class="line"><span class="keyword">let</span> anotherAge = --age + <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(age) <span class="comment">// 28</span></span><br><span class="line"><span class="built_in">console</span>.log(anotherAge) <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
+
+<p>前缀递增和递减在语句中的优先级是相等的，因此会从左到右一次求值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">2</span></span><br><span class="line"><span class="keyword">let</span> num2 = <span class="number">20</span></span><br><span class="line"><span class="keyword">let</span> num3 = --num1 + num2</span><br><span class="line"><span class="keyword">let</span> num4 = num1 + num2</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(num3) <span class="comment">// 21</span></span><br><span class="line"><span class="built_in">console</span>.log(num4) <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+
+<p>后缀版：递增和递减在语句被求值后才发生</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">2</span></span><br><span class="line"><span class="keyword">let</span> num2 = <span class="number">20</span></span><br><span class="line"><span class="keyword">let</span> num3 = num1-- + num2</span><br><span class="line"><span class="keyword">let</span> num4 = num1 + num2</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(num3) <span class="comment">// 22</span></span><br><span class="line"><span class="built_in">console</span>.log(num4) <span class="comment">// 21</span></span><br></pre></td></tr></table></figure>
+
+<p>递增和递减操作符可以作用于任何值，包括字符串、布尔值、浮点值，甚至对象。操作符遵循如下规则：</p>
+<ul>
+<li>对于字符串，如果是有效的数值形式，则转换为数值再应用改变。变量类型从字符串变成数值；如果不是有效的数值形式，则将变量的值设置为 NaN。变量类型从字符串变成数值</li>
+<li>对于布尔值，如果是 false，则转换为0再应用改变，变量类型从布尔值变成数值；如果是 true，则转换为1再应用改变，变量类型从布尔值变成数值</li>
+<li>对于浮点数，加1或减1</li>
+<li>对于对象，则调用 valueOf() 方法取得可以操作的值，对得到的值应用上述规则。如果是NaN，则调用 toString() 并再次应用其他规则。变量类型从对象变成数值</li>
+</ul>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><p>JS中所有的数值都以 IEEE754 64位格式存储，操作时是先把值转换为32位数值，再进行操作，然后再把结果转换为64位。<br><code>有符号整数</code>使用32位的前31位表示整数值，第32位表示数值的符号，如0表示正，1表示负，这一位称为<code>符号位(sign bit)</code>，它的值决定了数值其余部分的格式。正值以真正的二进制格式存储，负值以一种称为<code>二补数(或补码)</code>的二进制编码存储。<br>一个数值的二补数通过如下3个步骤计算得到：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1、确定绝对值的二进制表示（如：对于 -18，先确定18的二进制表示）</span></span><br><span class="line"><span class="comment"> * 2、找到数值的一补数（或反码），换句话说，就是每个0都变成1，1变成0</span></span><br><span class="line"><span class="comment"> * 3、给结果加1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//  18 的二进制表示</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">0010</span></span><br><span class="line"><span class="comment">// 计算一补数，即反转后的二进制值：</span></span><br><span class="line"><span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1110</span> <span class="number">1101</span></span><br><span class="line"><span class="comment">// 最后，给一补数加1</span></span><br><span class="line"><span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1111</span> <span class="number">1110</span> <span class="number">1110</span></span><br><span class="line"><span class="comment">// 以上值就是-18的二进制表示</span></span><br></pre></td></tr></table></figure>
+
+<p>如果将位操作符应用到非数值，那么首先会使用 Number() 函数将该值转换为数值，然后再应用位操作。最终结果是数值</p>
+<h4 id="按位非"><a href="#按位非" class="headerlink" title="按位非"></a><span id='bitWiseNon'>按位非</span></h4><p>按位非操作符用波浪符 ~ 表示，它的作用是返回数值的一补数。即二补数（复数）不执行最后加1那一步，最终结果是对数值取反并减1，就像执行如下操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1 = <span class="number">25</span></span><br><span class="line"><span class="keyword">let</span> num2 = -num1 - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(num2)  <span class="comment">// -26</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管两者的返回结果一样，但位操作的速度快得多。这是因为位操作是在数值的底层表示上完成的</p>
+<h4 id="按位与"><a href="#按位与" class="headerlink" title="按位与"></a><span id='bitwiseWith'>按位与</span></h4><p>按位与操作符用 &amp; 表示，有两个操作数。本质上，按位与就是将两个数的每一个位对齐，然后基于真值表中的规则，对每一位执行相应的与操作<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/png;base64,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" alt="真值表"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = <span class="number">25</span> &amp; <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 25 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1001</span></span><br><span class="line"><span class="comment">// 3 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0011</span></span><br><span class="line"><span class="comment">// 比较结果为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span></span><br><span class="line"><span class="comment">// 转换成10进制值为 1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按位或"><a href="#按位或" class="headerlink" title="按位或"></a><span id='pressBitwiseOr'>按位或</span></h4><p>用符号 | 表示。按位或操作至少一位是 1 时返回 1，两位都是 0 时返回 0</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = <span class="number">25</span> | <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result) <span class="comment">// 27</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 25 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1001</span></span><br><span class="line"><span class="comment">// 3 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0011</span></span><br><span class="line"><span class="comment">// 比较结果为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1011</span></span><br><span class="line"><span class="comment">// 转换成10进制值为 27</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="按位异或"><a href="#按位异或" class="headerlink" title="按位异或"></a><span id='byBitwiseOr'>按位异或</span></h4><p>用符号 ^ 表示。按位异或只在一位上是 1 的时候返回 1，两位都是 1 或 0，返回 0</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = <span class="number">25</span> ^ <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result) <span class="comment">// 26</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 25 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1001</span></span><br><span class="line"><span class="comment">// 3 的二进制值为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0011</span></span><br><span class="line"><span class="comment">// 比较结果为</span></span><br><span class="line"><span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0001</span> <span class="number">1010</span></span><br><span class="line"><span class="comment">// 转换成10进制值为 26</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="左移"><a href="#左移" class="headerlink" title="左移"></a><span id='leftMove'>左移</span></h4><p>用符号 &lt;&lt; 表示。会按照指定的位数将数值的所有位向左移动。高位左移溢出则舍弃该高位</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> old = <span class="number">2</span>  <span class="comment">// 等于二进制  10</span></span><br><span class="line"><span class="keyword">let</span> new1 = old &lt;&lt; <span class="number">5</span>  <span class="comment">// 等于二进制 1000000 即十进制 64</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在数字没有溢出的前提下，对于正数和负数，左移一位相当于乘以2的1次方，左移 n 位相当于乘以 2 的 n 次方</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：左移会保留它所操作数值的符号，比如 -2 左移 5 位，将得到 -64，而不是正 64</p>
+<h4 id="有符号右移"><a href="#有符号右移" class="headerlink" title="有符号右移"></a><span id='rightMove'>有符号右移</span></h4><p>用符号 &gt;&gt; 表示，会将数值的所有32位都向右移，同时保留符号（正或负）<br>右移后空位会出现在左侧，且在<strong>符号位之后</strong>。ECMAScript会用<strong>符号位的值</strong>来填充这些空位，以得到完成的数值<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/png;base64,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" alt="有符号右移实例图片"></p>
+<h4 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a><span id='unsigned'>无符号右移</span></h4><p>用符号 &gt;&gt;&gt; 表示，会将数值的所有 32 位都向右移。对于正数，无符号右移与有符号右移结果相同。<br>与有符号右移不同，无符号右移会给空位补0，而不管符号位是什么。</p>
+<ul>
+<li>对正数来说，跟有符号右移效果相同</li>
+<li>对负数来说，结果相差太多</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> old = -<span class="number">64</span> <span class="comment">// 二进制  1111 1111 1111 1111 1111 1111 1100 0000</span></span><br><span class="line"><span class="keyword">let</span> new1 = old &gt;&gt;&gt; <span class="number">5</span>  <span class="comment">// 二进制 0000 0111 1111 1111 1111 1111 1111 1110 -&gt; 十进制 134217726</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔操作符"><a href="#布尔操作符" class="headerlink" title="布尔操作符"></a>布尔操作符</h3><h4 id="逻辑非"><a href="#逻辑非" class="headerlink" title="逻辑非"></a>逻辑非</h4><p>用符号 ! 表示。首先将操作数转换为布尔值，然后再对其取反<br>同时使用两个 !! ，相当于调用了转型函数 Boolean()</p>
+<h4 id="逻辑与"><a href="#逻辑与" class="headerlink" title="逻辑与"></a>逻辑与</h4><p>用符号 &amp;&amp; 表示。只有两个操作符都为 true 时才返回 true<br>如果有操作符不是布尔值，则逻辑与并不一定会返回布尔值，而是遵循如下规则：</p>
+<ul>
+<li>如果第一个操作数为true，则返回第二个操作数</li>
+<li>如果第一个操作数为false，则返回第一个操作数<br><code>短路操作符/短路特性</code>：如果第一个操作符决定了结果，那么永远不会对第二个操作数求值<br>对逻辑与操作符来说，如果第一个操作符是 false , 那么无论第二个操作数是什么值，结果都不可能为 true</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> font = <span class="literal">true</span></span><br><span class="line"><span class="keyword">let</span> result = ( font &amp;&amp; aaa ) <span class="comment">// 报错。因为 aaa 未声明</span></span><br><span class="line"><span class="built_in">console</span>.log(reslut) <span class="comment">// 不执行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> font = <span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> result = ( font &amp;&amp; aaa ) <span class="comment">// 不报错</span></span><br><span class="line"><span class="built_in">console</span>.log(reslut) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="逻辑或"><a href="#逻辑或" class="headerlink" title="逻辑或"></a>逻辑或</h4><p>用符号 || 表示。只要有一个为 true 就返回 true<br>如果有操作符不是布尔值，则逻辑或并不一定会返回布尔值，而是遵循如下规则：</p>
+<ul>
+<li>如果第一个操作数为true，则返回第一个操作数</li>
+<li>如果第一个操作数为false，则返回第二个操作数<br>逻辑或操作符也有短路特性：当第一个操作数求值为 true 时，第二个操作数就不会再被求值了</li>
+</ul>
+<h3 id="乘性操作符"><a href="#乘性操作符" class="headerlink" title="乘性操作符"></a>乘性操作符</h3><h4 id="乘法操作符"><a href="#乘法操作符" class="headerlink" title="乘法操作符"></a>乘法操作符</h4><p>用符号 * 表示</p>
+<ul>
+<li>如果操作数都是数值，则执行正常的乘法运算。正正得正，负负得正，正负得负。如果乘积超出最大数，则返回 Infinity 或 -Infinity</li>
+<li>如果有不是数值的操作数，则先在后台用 Number() 将其转换为数值，然后再进行运算</li>
+<li>Infinity 乘以 0，返回 NaN</li>
+<li>Infinity 乘以非 0 的有限数值，则根据第二个操作数的符号返回 Infinity 或 -Infinity</li>
+<li>Infinity 乘以 Infinity，返回 Infinity</li>
+</ul>
+<h4 id="除法操作符"><a href="#除法操作符" class="headerlink" title="除法操作符"></a>除法操作符</h4><p>用符号 / 表示</p>
+<ul>
+<li>如果操作数都是数值，则执行常规的除法运算。正数相除是正数，负数相除是正数，正负相除或者负正相除是负数。如果 ECMAScript不能表示商，则返回 Infinity 或 -Infinity</li>
+<li>Infinity 除以 Infinity，返回 NaN</li>
+<li>0 除以 0，返回 NaN</li>
+<li>非 0 的有限值除以 0 ，则根据第一个操作数的符号返回 Infinity 或 -Infinity</li>
+<li>如果是 Infinity 除以任何数值，则根据第二个操作数的符号返回 Infinity 或 -Infinity</li>
+<li>如果有不是数值的操作数，则先在后台用 Number() 函数将其转换为数值，然后再按上述规则进行运算</li>
+</ul>
+<h4 id="取模操作符"><a href="#取模操作符" class="headerlink" title="取模操作符"></a>取模操作符</h4><p>用符号 % 表示。用于获取余数</p>
+<ul>
+<li>如果操作数是数值，则执行常规除法运算，返回余数</li>
+<li>如果被除数是无限值，除数是有限值，则返回 NaN</li>
+<li>如果被除数是有限值，除数是0，则返回 NaN</li>
+<li>如果是 Infinity 除以 Infinity，返回 NaN</li>
+<li>如果被除数是有限值，除数是无限值，则返回被除数</li>
+<li>如果被除数是0，除数不是0，则返回0</li>
+<li>如果有不是数值的操作数，则先在后台用 Number() 函数将其转换为数值，然后再按上述规则进行运算</li>
+</ul>
+<h3 id="指数操作符"><a href="#指数操作符" class="headerlink" title="指数操作符"></a>指数操作符</h3><p>ES7新增，用符号 ** 表示，与 Math.pow() 结果一样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.pow(<span class="number">3</span>,<span class="number">2</span>))  <span class="comment">// 9</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span> ** <span class="number">2</span>) <span class="comment">// 9</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.pow(<span class="number">16</span>,<span class="number">0.5</span>)) <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">16</span> ** <span class="number">0.5</span>) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>指数操作符也支持指数赋值操作符 **=</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">3</span></span><br><span class="line">a **= <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="加性操作符"><a href="#加性操作符" class="headerlink" title="加性操作符"></a>加性操作符</h3><h4 id="加法操作符"><a href="#加法操作符" class="headerlink" title="加法操作符"></a>加法操作符</h4><ul>
+<li><p>两个数值相加</p>
+<ul>
+<li>Infinity + Infinity = Infinity</li>
+<li>-Infinity + -Infinity = -Infinity</li>
+<li>Infinity + -Infinity = NaN</li>
+<li>+0 + +0 = +0</li>
+<li>-0 + +0 = +0</li>
+<li>-0 + -0 = -0</li>
+</ul>
+</li>
+<li><p>如果有一个是字符串，则将另一个操作数转换为字符串，然后进行拼接</p>
+</li>
+<li><p>如果有一个操作数是对象、数值或者布尔值，会调用 toString() 方法以获取字符串，然后执行上面的关于字符串的规则；undefined 和 null 会调用 String() 函数，分别获取 “undefined” 和 “null”</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">5</span> + <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 10</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="string">&#x27;5&#x27;</span> + <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// &#x27;55&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="减法操作符"><a href="#减法操作符" class="headerlink" title="减法操作符"></a>减法操作符</h4><p>如下规则：</p>
+<ul>
+<li>Infinity - Infinity = NaN</li>
+<li>-Infinity - -Infinity = NaN</li>
+<li>Infinity - -Infinity = Infinity</li>
+<li>-Infinity - Infinity = -Infinity</li>
+<li>+0 - +0 = +0</li>
+<li>+0 - -0 = -0</li>
+<li>-0 - -0 = +0</li>
+<li>如果有任一操作数是 NaN，返回 NaN</li>
+<li>如果任一操作符是字符串、布尔值、null 或 undefined，则先在后台使用 Number() 将其转换为数值，然后再根据前面的规则执行数学运算</li>
+<li>如果有任一操作数是对象，则调用其 valueOf() 方法取得表示它的数值，如果该值是 NaN，则减法计算的结果是 NaN。如果对象没有 valueOf() 方法，则调用 toString() 方法，然后再将得到的字符串转换为数值</li>
+</ul>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><p>执行比较两个值的操作，包括 &lt; 、&gt; 、&lt;= 、&gt;= ，都返回布尔值</p>
+<ul>
+<li>如果操作数都是数值，执行数值比较</li>
+<li>如果有任一操作数是数值，则将另一个操作数转换为数值，执行比较</li>
+<li>如果有任一操作数是对象，则调用 valueOf() 方法，取得结果后再根据前面的规则进行比较；如果没有 valueOf() 操作符，则调用 toString() 方法，取得结果后再根据前面的规则进行比较</li>
+<li>如果有任一操作数是布尔值，则将其转换为数值再进行比较</li>
+<li>两个字符串比较，会比较该字符串对应的编码的数值</li>
+<li>NaN 和 任何操作符比较时都是 false</li>
+</ul>
+<h3 id="相等操作符"><a href="#相等操作符" class="headerlink" title="相等操作符"></a>相等操作符</h3><h4 id="等于和不等于"><a href="#等于和不等于" class="headerlink" title="等于和不等于"></a>等于和不等于</h4><blockquote>
+<p>比较之前会执行类型转换。等于用符号 == 表示；不等于用符号 != 表示</p>
+</blockquote>
+<ul>
+<li>如果任一操作数是布尔值，则将其转换为数值再进行比较</li>
+<li>如果一个操作数是字符串，另一个是数值，则将字符串转换为数值，再进行比较</li>
+<li>如果一个操作数是对象，另一个不是，则调用 valueOf() 方法取得其原始值，再根据前面的规则进行比较</li>
+<li>null 和 undefined 相等</li>
+<li>null 和 undefined 不能转换为其他类型的值再进行比较<br>NaN 不等于任何值</li>
+<li>如果两个操作数都是对象，则比较他们是不是同一个对象。如果都指向同一个对象，则相等</li>
+</ul>
+<h4 id="全等和不全等"><a href="#全等和不全等" class="headerlink" title="全等和不全等"></a>全等和不全等</h4><blockquote>
+<p>比较时不进行类型转换，只有两个操作数在不转换的前提下相等才返回 true。全等用符号 === 表示，不全等用 !== 表示</p>
+</blockquote>
+<h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><p>在赋值时使用逗号操作符分隔值，最终会返回表达式中最后一个值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = ( <span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span> ) <span class="comment">// num 的值为 0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h3 id="do-while-语句"><a href="#do-while-语句" class="headerlink" title="do-while 语句"></a>do-while 语句</h3><p>循环体中的代码执行后才会退出条件进行求值。换句话说，循环体内的代码至少执行一次</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    i+=<span class="number">2</span></span><br><span class="line">&#125; <span class="keyword">while</span>(i &lt; <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="标签语句"><a href="#标签语句" class="headerlink" title="标签语句"></a>标签语句</h3><p>用于给语句加标签，典型应用场景是嵌套循环</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">0</span>;</span><br><span class="line">outermost: <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ )&#123;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>( i ===<span class="number">5</span> &amp;&amp; j ==<span class="number">5</span> )&#123;</span><br><span class="line">            <span class="keyword">break</span> outermost  <span class="comment">// 添加标签，不仅退出内部循环，也会退出外部循环</span></span><br><span class="line">        &#125;</span><br><span class="line">        num++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(num) <span class="comment">// 55</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> num = <span class="number">0</span>;</span><br><span class="line">outermost: <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ )&#123;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ )&#123;</span><br><span class="line">        <span class="keyword">if</span>( i ===<span class="number">5</span> &amp;&amp; j ==<span class="number">5</span> )&#123;</span><br><span class="line">            <span class="keyword">continue</span> outermost  <span class="comment">// 添加标签，结束本轮循环，进行下一轮循环</span></span><br><span class="line">        &#125;</span><br><span class="line">        num++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(num) <span class="comment">// 95   j 执行到5时，本轮循环结束，进行了下一轮，相当于少执行了5次，故为 95</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="break-和-continue"><a href="#break-和-continue" class="headerlink" title="break 和 continue"></a>break 和 continue</h3><p>breack 用于立即退出循环<br>continue 用于立即退出此次循环，进行下一轮循环</p>
+<h3 id="with-语句"><a href="#with-语句" class="headerlink" title="with 语句"></a>with 语句</h3><p>用于将代码作用于设置为特定的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> qs = location.search.substring(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">let</span> hostname = location.hostname</span><br><span class="line"><span class="keyword">let</span> url = location.href</span><br><span class="line"><span class="comment">// 上面的代码中都用到了 location 对象，可以使用 with 语句，如下</span></span><br><span class="line"><span class="function"><span class="title">with</span>(<span class="params">location</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> qs = search.substring(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">let</span> hostname = hostname</span><br><span class="line">    <span class="keyword">let</span> url = href</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>严格模式不允许使用 with 语句，否则会抛出错误</strong><br><strong>由于 with 语句影响性能且难于调试，通常不推荐在产品代码中使用</strong></p>
+</blockquote>
+<h3 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h3><p>switch 语句在比较每个条件的值时会使用全等操作符（===）</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>严格模式下对函数的一些限制：</p>
+<ul>
+<li>函数不能以 eval 或 arguments 作为名称</li>
+<li>函数的参数不能叫 eval 或 arguments</li>
+<li>两个命名参数不能拥有同一名称</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E7%A8%8B4%E7%AC%94%E8%AE%B0/">高程4笔记</a></div><div class="post_share"><div class="social-share" data-image="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&amp;rs=1" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/javascript/gc4-4/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&amp;refer=http%3A%2F%2Fnimg.ws.126.net&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1642295342&amp;t=1541235e44283cd50dc0888b18d1a3dc" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第四章 变量、作用域与内存</div></div></a></div><div class="next-post pull-right"><a href="/gossip/unknow/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.zcool.cn/community/01fb6a5dee2727a8012138531a5ab7.jpg@1280w_1l_2o_100sh.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">神秘现象</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/javascript/gc4-10/" title="第十章 函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/function_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-30</div><div class="title">第十章 函数</div></div></a></div><div><a href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-04</div><div class="title">第二十章 JavaScript API</div></div></a></div><div><a href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-17</div><div class="title">第十一章 Promise 与异步函数</div></div></a></div><div><a href="/javascript/gc4-4/" title="第四章 变量、作用域与内存"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1642295342&t=1541235e44283cd50dc0888b18d1a3dc" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第四章 变量、作用域与内存</div></div></a></div><div><a href="/javascript/gc4-5/" title="第五章 基本引用类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第五章 基本引用类型</div></div></a></div><div><a href="/javascript/gc4-6/" title="第六章 集合引用类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第六章 集合引用类型</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郭伟杰</div><div class="author-info__description">尽吾志也而不能至者，可以无悔矣</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/guo-weijie"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/guo-weijie" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:weijie.g@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">少壮不努力，老大徒伤悲 <br /> 君何必言利，亦有仁义焉 <br /> 一切古代史都是当代史 <br /> 每天进步一点点</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">数据类型及转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88let%E5%A3%B0%E6%98%8E%E7%9A%84%E5%8F%98%E9%87%8F%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%9A%82%E6%97%B6%E6%80%A7%E6%AD%BB%E5%8C%BA%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">为什么let声明的变量会出现暂时性死区问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-number">1.2.</span> <span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.3.</span> <span class="toc-text">null</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number"><span class="toc-number">1.4.</span> <span class="toc-text">Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String"><span class="toc-number">1.5.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol"><span class="toc-number">1.6.</span> <span class="toc-text">Symbol</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">1.6.1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E7%AC%A6%E5%8F%B7%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">全局符号注册表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object"><span class="toc-number">1.7.</span> <span class="toc-text">Object</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.1.</span> <span class="toc-text">一元操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.2.</span> <span class="toc-text">位操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E9%9D%9E"><span class="toc-number">2.2.1.</span> <span class="toc-text">按位非</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E"><span class="toc-number">2.2.2.</span> <span class="toc-text">按位与</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96"><span class="toc-number">2.2.3.</span> <span class="toc-text">按位或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96"><span class="toc-number">2.2.4.</span> <span class="toc-text">按位异或</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E7%A7%BB"><span class="toc-number">2.2.5.</span> <span class="toc-text">左移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="toc-number">2.2.6.</span> <span class="toc-text">有符号右移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB"><span class="toc-number">2.2.7.</span> <span class="toc-text">无符号右移</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.3.</span> <span class="toc-text">布尔操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E9%9D%9E"><span class="toc-number">2.3.1.</span> <span class="toc-text">逻辑非</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E"><span class="toc-number">2.3.2.</span> <span class="toc-text">逻辑与</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%88%96"><span class="toc-number">2.3.3.</span> <span class="toc-text">逻辑或</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%98%E6%80%A7%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.4.</span> <span class="toc-text">乘性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%98%E6%B3%95%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.4.1.</span> <span class="toc-text">乘法操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A4%E6%B3%95%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.4.2.</span> <span class="toc-text">除法操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E6%A8%A1%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.4.3.</span> <span class="toc-text">取模操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">指数操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%80%A7%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.6.</span> <span class="toc-text">加性操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.6.1.</span> <span class="toc-text">加法操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%8F%E6%B3%95%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.6.2.</span> <span class="toc-text">减法操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.7.</span> <span class="toc-text">关系操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E7%AD%89%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.8.</span> <span class="toc-text">相等操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E4%BA%8E%E5%92%8C%E4%B8%8D%E7%AD%89%E4%BA%8E"><span class="toc-number">2.8.1.</span> <span class="toc-text">等于和不等于</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E7%AD%89%E5%92%8C%E4%B8%8D%E5%85%A8%E7%AD%89"><span class="toc-number">2.8.2.</span> <span class="toc-text">全等和不全等</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%97%E5%8F%B7%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.9.</span> <span class="toc-text">逗号操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while-%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.1.</span> <span class="toc-text">do-while 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.2.</span> <span class="toc-text">标签语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break-%E5%92%8C-continue"><span class="toc-number">3.3.</span> <span class="toc-text">break 和 continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with-%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.4.</span> <span class="toc-text">with 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch-%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.5.</span> <span class="toc-text">switch 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">函数</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/javascript/array/" title="Array 常用方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Array 常用方法"/></a><div class="content"><a class="title" href="/javascript/array/" title="Array 常用方法">Array 常用方法</a><time datetime="2023-03-13T12:20:11.320Z" title="更新于 2023-03-13 20:20:11">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/babble/" title="呓语"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/babble_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="呓语"/></a><div class="content"><a class="title" href="/gossip/babble/" title="呓语">呓语</a><time datetime="2023-03-13T11:48:10.636Z" title="更新于 2023-03-13 19:48:10">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/xm1014/" title="XM1014"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XM1014"/></a><div class="content"><a class="title" href="/gossip/xm1014/" title="XM1014">XM1014</a><time datetime="2023-02-19T04:21:11.129Z" title="更新于 2023-02-19 12:21:11">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十一章 Promise 与异步函数"/></a><div class="content"><a class="title" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数">第十一章 Promise 与异步函数</a><time datetime="2022-12-01T03:28:18.389Z" title="更新于 2022-12-01 11:28:18">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二十章 JavaScript API"/></a><div class="content"><a class="title" href="/javascript/gc4-20/" title="第二十章 JavaScript API">第二十章 JavaScript API</a><time datetime="2022-11-25T07:03:09.639Z" title="更新于 2022-11-25 15:03:09">2022-11-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郭伟杰</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href='https://cn.keep-silence.com'>国内访问</a>  <a href='https://keep-silence.com'>国外访问</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://fastly.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://fastly.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7b4f59d781f410b781cd',
+      clientSecret: '9ec6c6aaee7eee19fd3a6b3ef0d3d2998a624e00',
+      repo: 'ghosie',
+      owner: 'guo-weijie',
+      admin: ['guo-weijie'],
+      id: 'fe20911216f8727052d2444bafbae1ee',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://fastly.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

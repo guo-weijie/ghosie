@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第四章 变量、作用域与内存 | Ghosie的博客</title><meta name="keywords" content="javascript,高程4笔记"><meta name="author" content="郭伟杰"><meta name="copyright" content="郭伟杰"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="原始值与引用值动态属性原始值类型的初始化可以只使用原始字面量形式。如果使用的是 new 关键字，则 JavaScript 会创建一个 Object 类型的实例，但其行为类似原始值 12345678let name1 &#x3D; &amp;#x27;haha&amp;#x27;let name2 &#x3D; new String(&amp;#x27;hehe&amp;#x27;)name1.age &#x3D; 25name2.age &#x3D; 26consol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章 变量、作用域与内存">
+<meta property="og:url" content="https://keep-silence.com/javascript/gc4-4/index.html">
+<meta property="og:site_name" content="Ghosie的博客">
+<meta property="og:description" content="原始值与引用值动态属性原始值类型的初始化可以只使用原始字面量形式。如果使用的是 new 关键字，则 JavaScript 会创建一个 Object 类型的实例，但其行为类似原始值 12345678let name1 &#x3D; &amp;#x27;haha&amp;#x27;let name2 &#x3D; new String(&amp;#x27;hehe&amp;#x27;)name1.age &#x3D; 25name2.age &#x3D; 26consol">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1642295342&t=1541235e44283cd50dc0888b18d1a3dc">
+<meta property="article:published_time" content="2021-12-15T07:03:50.000Z">
+<meta property="article:modified_time" content="2022-10-17T07:05:04.528Z">
+<meta property="article:author" content="郭伟杰">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="高程4笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1642295342&t=1541235e44283cd50dc0888b18d1a3dc"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://keep-silence.com/javascript/gc4-4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第四章 变量、作用域与内存',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-17 15:05:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.devpoint.cn/data/upload/site_15/knowledge/2020/07/19/1200_697_5f14001e9146d.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ghosie的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第四章 变量、作用域与内存</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-15T07:03:50.000Z" title="发表于 2021-12-15 15:03:50">2021-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-17T07:05:04.528Z" title="更新于 2022-10-17 15:05:04">2022-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第四章 变量、作用域与内存"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="原始值与引用值"><a href="#原始值与引用值" class="headerlink" title="原始值与引用值"></a>原始值与引用值</h2><h3 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h3><p>原始值类型的初始化可以只使用原始字面量形式。如果使用的是 new 关键字，则 JavaScript 会创建一个 Object 类型的实例，但其行为类似原始值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name1 = <span class="string">&#x27;haha&#x27;</span></span><br><span class="line"><span class="keyword">let</span> name2 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&#x27;hehe&#x27;</span>)</span><br><span class="line">name1.age = <span class="number">25</span></span><br><span class="line">name2.age = <span class="number">26</span></span><br><span class="line"><span class="built_in">console</span>.log(name1.age) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(name2.age) <span class="comment">// 26</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> name1) <span class="comment">// string</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> name2) <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="执行上下文与作用域"><a href="#执行上下文与作用域" class="headerlink" title="执行上下文与作用域"></a>执行上下文与作用域</h2><p>变量对象（ variable object ）</p>
+<blockquote>
+<p>每一个上下文都有一个关联的变量对象，而这个上下文中定义的所有变量和函数都存在于这个对象上</p>
+</blockquote>
+<p>作用域链（ scope chain ）<br>活动对象（ activation object ）</p>
+<h3 id="作用域链增强"><a href="#作用域链增强" class="headerlink" title="作用域链增强"></a>作用域链增强</h3><p>某些语句会导致在作用域链前端临时添加一个上下文，这个上下文在代码执行后会被删除。通常在两种情况下会出现这个现象：</p>
+<ul>
+<li>try / catch 语句的 catch 块</li>
+<li>with 语句</li>
+</ul>
+<p>这两种情况下，都会在作用域链前端添加一个变量对象。对 with 语句来说，会向作用域链前端添加指定的对象；对 catch 语句而言，则会创建一个新的变量对象，这个变量对象会包含要抛出的错误对象的声明</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildUrl</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> qs = <span class="string">&quot;?debug=true&quot;</span></span><br><span class="line">    <span class="function"><span class="title">with</span>(<span class="params">location</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> url = href + qs</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> url</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里 with 语句将 location 对象作为上下文，因此 location 会被添加到作用域链前端。当 with 中的代码引用变量 href 时，实际上引用的是 location.href，也就是自己变量对象的属性；而 qs 则是定义在 buildUrl() 中的那个变量，它定义在函数上下文的变量对象上。with 块中使用 let 声明的变量，被限制在块级作用域，buildUrl() 中没有定义，所以执行到 return 行会报错，如果换成 var 则可以正常执行</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><blockquote>
+<p>var 声明会被拿到函数或全局作用域的顶部，位于作用域中所有代码之前，这个现象叫做“提升”(hoisting)</p>
+</blockquote>
+<p>if块、while块、function块，甚至连单独的块也是 let 声明变量的作用域</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这不是对象字面量，而是一个独立的块</span></span><br><span class="line"><span class="comment">// JavaScript 解释器会根据其中内容识别出它来</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 const 声明的变量必须同时初始化为某个值</p>
+<p>如果想让整个对象都不能修改，可以使用 Object.freeze()，这样再给属性赋值时虽然不会报错，但会静默失败</p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><h3 id="标记清理（-mark-and-sweep-）"><a href="#标记清理（-mark-and-sweep-）" class="headerlink" title="标记清理（ mark-and-sweep ）"></a>标记清理（ mark-and-sweep ）</h3><p>垃圾回收程序运行的时候，会标记内存中存储的所有变量，然后，它会将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉。在此之后再被加上标记的变量就是待删除的了，原因是任何在上下文中的变量都访问不到它们了，最后垃圾回收程序做一次<strong>内存清理</strong>，销毁带标记的所有值并收回他们的内存</p>
+<p>到了2008年，IE、Firefox、Opera、Chrome 和 Safari 都在自己的 JavaScript 实现中采用标记清理（或其变体），只是在运行垃圾回收的频率上有所差异</p>
+<h3 id="引用计数（-reference-counting-）"><a href="#引用计数（-reference-counting-）" class="headerlink" title="引用计数（ reference counting ）"></a>引用计数（ reference counting ）</h3><p>对每个值都记录它被引用的次数。声明变量并给它赋一个<em>引用值</em>时，这个值的引用数位1，如果同一个值又被赋给另一个变量，那么引用数加1。类似的，如果保存对该值引用的变量被其他值给覆盖了，那么引用数减1。当一个值的引用数为0时，就说明没办法再访问到这个值了，因此可以安全地回收其内存了。垃圾回收程序下次运行的时候就会释放引用数为0的值的内存</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p><strong>解除引用</strong>：如果数据不再必要，那么把它设置为 null，从而释放其引用（这个建议最适合全局变量和全局对象的属性）<br>1、通过 const 和 let 声明提升性能<br>    const 和 let 都以块为作用域（而非函数），所以相比于使用 var，使用这两个新关键字可能会更早的让垃圾回收程序介入，尽早回收应该回收的内存<br>2、隐藏类和删除操作<br>    同一个构造函数创建的两个实例，共用一个隐藏类，如果其中一个实例进行动态属性赋值操作，会导致两个实例对应两个不同的隐藏类。所以，应该避免“先创建再补充”（ ready-fire-aim ）式的动态属性赋值，并在构造函数中一次性声明所有属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Article</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.title = <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a1 = <span class="keyword">new</span> Article()</span><br><span class="line"><span class="keyword">let</span> a2 = <span class="keyword">new</span> Article()</span><br><span class="line">a2.author = <span class="string">&#x27;Jack&#x27;</span>   <span class="comment">// 动态属性赋值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Article</span>(<span class="params">author</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.title = <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">    <span class="built_in">this</span>.name = author</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a1 = <span class="keyword">new</span> Article()</span><br><span class="line"><span class="keyword">let</span> a2 = <span class="keyword">new</span> Article(<span class="string">&#x27;Jack&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用 delete 关键字会导致生成相同的隐藏类片段，最佳实践是把不想要的属性设置为 null</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E7%A8%8B4%E7%AC%94%E8%AE%B0/">高程4笔记</a></div><div class="post_share"><div class="social-share" data-image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&amp;refer=http%3A%2F%2Fnimg.ws.126.net&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=jpeg?sec=1642295342&amp;t=1541235e44283cd50dc0888b18d1a3dc" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/javascript/gc4-5/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第五章 基本引用类型</div></div></a></div><div class="next-post pull-right"><a href="/javascript/gc4-3/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&amp;rs=1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第三章 语言基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/javascript/gc4-10/" title="第十章 函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/function_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-30</div><div class="title">第十章 函数</div></div></a></div><div><a href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-04</div><div class="title">第二十章 JavaScript API</div></div></a></div><div><a href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-17</div><div class="title">第十一章 Promise 与异步函数</div></div></a></div><div><a href="/javascript/gc4-3/" title="第三章 语言基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&rs=1" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第三章 语言基础</div></div></a></div><div><a href="/javascript/gc4-5/" title="第五章 基本引用类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第五章 基本引用类型</div></div></a></div><div><a href="/javascript/gc4-6/" title="第六章 集合引用类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第六章 集合引用类型</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郭伟杰</div><div class="author-info__description">尽吾志也而不能至者，可以无悔矣</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/guo-weijie"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/guo-weijie" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:weijie.g@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">少壮不努力，老大徒伤悲 <br /> 君何必言利，亦有仁义焉 <br /> 一切古代史都是当代史 <br /> 每天进步一点点</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%80%BC%E4%B8%8E%E5%BC%95%E7%94%A8%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">原始值与引用值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">动态属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">执行上下文与作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E5%A2%9E%E5%BC%BA"><span class="toc-number">2.1.</span> <span class="toc-text">作用域链增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="toc-number">2.2.</span> <span class="toc-text">变量声明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-number">3.</span> <span class="toc-text">垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E7%90%86%EF%BC%88-mark-and-sweep-%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">标记清理（ mark-and-sweep ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%EF%BC%88-reference-counting-%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">引用计数（ reference counting ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">内存管理</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/javascript/array/" title="Array 常用方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Array 常用方法"/></a><div class="content"><a class="title" href="/javascript/array/" title="Array 常用方法">Array 常用方法</a><time datetime="2023-03-13T12:20:11.320Z" title="更新于 2023-03-13 20:20:11">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/babble/" title="呓语"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/babble_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="呓语"/></a><div class="content"><a class="title" href="/gossip/babble/" title="呓语">呓语</a><time datetime="2023-03-13T11:48:10.636Z" title="更新于 2023-03-13 19:48:10">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/xm1014/" title="XM1014"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XM1014"/></a><div class="content"><a class="title" href="/gossip/xm1014/" title="XM1014">XM1014</a><time datetime="2023-02-19T04:21:11.129Z" title="更新于 2023-02-19 12:21:11">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十一章 Promise 与异步函数"/></a><div class="content"><a class="title" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数">第十一章 Promise 与异步函数</a><time datetime="2022-12-01T03:28:18.389Z" title="更新于 2022-12-01 11:28:18">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二十章 JavaScript API"/></a><div class="content"><a class="title" href="/javascript/gc4-20/" title="第二十章 JavaScript API">第二十章 JavaScript API</a><time datetime="2022-11-25T07:03:09.639Z" title="更新于 2022-11-25 15:03:09">2022-11-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郭伟杰</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href='https://cn.keep-silence.com'>国内访问</a>  <a href='https://keep-silence.com'>国外访问</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://fastly.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://fastly.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7b4f59d781f410b781cd',
+      clientSecret: '9ec6c6aaee7eee19fd3a6b3ef0d3d2998a624e00',
+      repo: 'ghosie',
+      owner: 'guo-weijie',
+      admin: ['guo-weijie'],
+      id: '1382860c8651be37b2674076b6214c35',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://fastly.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

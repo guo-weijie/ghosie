@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>第六章 集合引用类型 | Ghosie的博客</title><meta name="keywords" content="javascript,高程4笔记"><meta name="author" content="郭伟杰"><meta name="copyright" content="郭伟杰"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Array创建数组 使用 Array 构造函数 数组字面量  ES6 在 Array 构造函数上新增了两个用于创建数组的静态方法：from() 和 of() from() 用于将类数组解构转换为数组实例参数：第一个参数是一个类数组对象，即任何可迭代的结构，或者有一个 length 属性和可索引元素的结构；第二个参数为可选，是一个函数，新数组中的每个元素都会执行该回调函数；第三个参数为可选，指定执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第六章 集合引用类型">
+<meta property="og:url" content="https://keep-silence.com/javascript/gc4-6/index.html">
+<meta property="og:site_name" content="Ghosie的博客">
+<meta property="og:description" content="Array创建数组 使用 Array 构造函数 数组字面量  ES6 在 Array 构造函数上新增了两个用于创建数组的静态方法：from() 和 of() from() 用于将类数组解构转换为数组实例参数：第一个参数是一个类数组对象，即任何可迭代的结构，或者有一个 length 属性和可索引元素的结构；第二个参数为可选，是一个函数，新数组中的每个元素都会执行该回调函数；第三个参数为可选，指定执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://smnarnold.com/assets/page-previews/js.png">
+<meta property="article:published_time" content="2021-12-15T07:09:30.000Z">
+<meta property="article:modified_time" content="2022-10-17T07:03:37.789Z">
+<meta property="article:author" content="郭伟杰">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="高程4笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://smnarnold.com/assets/page-previews/js.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://keep-silence.com/javascript/gc4-6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第六章 集合引用类型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-17 15:03:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.php.cn/upload/article/202111/19/2021111916450974279.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ghosie的博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 目录</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/myHtml/on2job.html"><i class="fa-fw fas fa-gamepad"></i><span> 摸鱼</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://win11.keep-silence.com"><i class="fa-fw fab fa-windows"></i><span> win11</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第六章 集合引用类型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-15T07:09:30.000Z" title="发表于 2021-12-15 15:09:30">2021-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-17T07:03:37.789Z" title="更新于 2022-10-17 15:03:37">2022-10-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/javascript/">javascript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第六章 集合引用类型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h3><ul>
+<li>使用 Array 构造函数</li>
+<li>数组字面量</li>
+</ul>
+<p>ES6 在 Array 构造函数上新增了两个用于创建数组的静态方法：<code>from()</code> 和 <code>of()</code></p>
+<p><code>from()</code> 用于将类数组解构转换为数组实例<br>参数：第一个参数是一个类数组对象，即任何可迭代的结构，或者有一个 length 属性和可索引元素的结构；第二个参数为可选，是一个函数，新数组中的每个元素都会执行该回调函数；第三个参数为可选，指定执行回调函数时的 this（箭头函数不适用）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串会被拆分成单字符数组</span></span><br><span class="line"><span class="built_in">Array</span>.from(<span class="string">&#x27;Matt&#x27;</span>) <span class="comment">// [&#x27;M&#x27;,&#x27;a&#x27;,&#x27;t&#x27;,&#x27;t&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以将集合和映射转换为一个新数组</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="built_in">Map</span>().set(<span class="number">1</span>,<span class="number">2</span>).set(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> <span class="built_in">Set</span>().add(<span class="number">1</span>).add(<span class="number">2</span>).add(<span class="number">3</span>).add(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.from(a) <span class="comment">// [[1,2],[3,4]]</span></span><br><span class="line"><span class="built_in">Array</span>.from(b) <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对现有数组进行浅复制</span></span><br><span class="line"><span class="keyword">const</span> ai = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>]]</span><br><span class="line"><span class="keyword">const</span> a2 = <span class="built_in">Array</span>.from(a1)</span><br><span class="line"></span><br><span class="line">a1 === a2 <span class="comment">// false</span></span><br><span class="line">a1[<span class="number">3</span>] === a2[<span class="number">3</span>] <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以使用任何可迭代对象</span></span><br><span class="line"><span class="keyword">const</span> iter = &#123;</span><br><span class="line">    *[<span class="built_in">Symbol</span>.iterator]()&#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Array</span>.from(iter) <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// arguments 对象转换为数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArgs2Array</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line">getArgs2Array(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 转换带有必要属性的自定义对象(类数组)</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="number">3</span>,</span><br><span class="line">    <span class="number">3</span>: <span class="number">4</span>,</span><br><span class="line">    length: <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Array</span>.from(obj) <span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 带第二个参数</span></span><br><span class="line"><span class="keyword">const</span> a1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">const</span> a2 = <span class="built_in">Array</span>.from(a1, <span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span> ) <span class="comment">// [2,4,6,8]</span></span><br><span class="line"><span class="keyword">const</span> a3 = <span class="built_in">Array</span>.from(a1, <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="keyword">return</span> x*<span class="built_in">this</span>.exponent&#125;, &#123;<span class="attr">expooent</span>: <span class="number">2</span>&#125;) <span class="comment">// [2,4,6,8]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>of()</code> 用于将一组参数转换为数组实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Array.of() 和 Array 构造函数的区别在于处理整数参数</span></span><br><span class="line"><span class="built_in">Array</span>.of(<span class="number">7</span>) <span class="comment">// [7]</span></span><br><span class="line"><span class="built_in">Array</span>.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="comment">// [1,2,3]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>(<span class="number">7</span>) <span class="comment">// [ , , , , , , ] 7个空位(empty)，不是7个undefined</span></span><br><span class="line"><span class="built_in">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) <span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组空位"><a href="#数组空位" class="headerlink" title="数组空位"></a>数组空位</h3><p>ES6 新增方法普遍将这些空位当成存在的元素，值为 undefined<br>ES6 之前的方法会忽略空位，但具体行为因方法而异</p>
+<blockquote>
+<p>由于行为不一致和存在性能隐患，因此实践中要避免使用数组空位。如果确实需要空位，可以显示的用 undefined 值替代</p>
+</blockquote>
+<h3 id="复制和填充方法"><a href="#复制和填充方法" class="headerlink" title="复制和填充方法"></a>复制和填充方法</h3><p>ES6 新增：（以下两个方法都不会改变数组的大小）<br>copyWithin()：浅复制数组的一部分到同一数组中的另一个位置，并返回它<br>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.copyWithin(target,start(可选),end(可选))</span><br></pre></td></tr></table></figure>
+
+<p>参数：<br>target: 复制内容到该位置<br>start: 开始复制元素的起始位置。如果不写，默认值为0<br>end: 开始复制元素的结束位置（不包括该位置）。如果不写，会一直到末尾</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ints = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">ints.copyWithin(<span class="number">4</span>,<span class="number">0</span>,<span class="number">3</span>) <span class="comment">// [0,1,2,3,0,1,2,7,8,9]</span></span><br><span class="line"><span class="comment">// copyWithin() 的负数和 fill() 的负数处理是一样的</span></span><br><span class="line">inst.copyWithin(-<span class="number">4</span>,-<span class="number">7</span>,-<span class="number">3</span>) <span class="comment">// [0, 1, 2, 3, 4, 5, 3, 4, 5, 6]</span></span><br><span class="line"><span class="comment">// 超出边界的处理也和 fill() 相同</span></span><br></pre></td></tr></table></figure>
+
+<p>fill()：填充<br>参数：填充内容，开始索引（可选），结束索引（可选，不包括该位置）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ary = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不指定起始索引</span></span><br><span class="line">ary.fill(<span class="number">5</span>) <span class="comment">// [5, 5, 5, 5, 5]</span></span><br><span class="line"></span><br><span class="line">ary.fill(<span class="number">0</span>) <span class="comment">// 重置 ary，以下每次示例默认会重置，但不再写</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定索引</span></span><br><span class="line">ary.fill(<span class="number">6</span>,<span class="number">2</span>,<span class="number">4</span>) <span class="comment">// [0, 0, 6, 6, 0]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 负数索引(负数索引会替换为 总长度+负数 )</span></span><br><span class="line">ary.fill(<span class="number">2</span>,-<span class="number">4</span>,-<span class="number">2</span>) <span class="comment">// -&gt; ary.fill(2,1,3) -&gt; [0,2,2,0,0]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 超出数组边界、零长度和方向相反的索引范围会被忽略</span></span><br><span class="line">ary.fill(<span class="number">2</span>,<span class="number">10</span>,<span class="number">15</span>) <span class="comment">// [0,0,0,0,0]</span></span><br><span class="line">ary.fill(<span class="number">2</span>,-<span class="number">10</span>,-<span class="number">6</span>) <span class="comment">// [0,0,0,0,0]</span></span><br><span class="line">ary.fill(<span class="number">2</span>,<span class="number">4</span>,<span class="number">2</span>) <span class="comment">// [0,0,0,0,0]</span></span><br><span class="line">ary.fill(<span class="number">2</span>,<span class="number">2</span>,<span class="number">10</span>) <span class="comment">// [0,0,2,2,2]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="排序方法"><a href="#排序方法" class="headerlink" title="排序方法"></a>排序方法</h3><p><code>sort()</code><br>默认情况下，sort() 会按照升序重新排列数组元素，即最小的值在前面，最大的值在后面。为此，sort() 会在每一项上调用 String() 转型函数，然后比较字符串来决定顺序。即使数组的元素都是数值，也会先把数组转换为字符串再比较、排序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>]</span><br><span class="line">values.sort()</span><br><span class="line">alert(values) <span class="comment">// 0,1,10,15,5</span></span><br></pre></td></tr></table></figure>
+
+<p>由于字符串 “10” 在字符串 “5” 的前头，所以 10 还是会排到 5 前面。为此，sort() 方法可以接收一个比较函数，用于判断哪个值应该排在前面</p>
+<blockquote>
+<p>revuerse() 和 sort() 都返回调用他们的数组的引用</p>
+</blockquote>
+<h3 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h3><p><code>concat()</code><br>返回值：<br>返回一个新数组，不会改变原数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&#x27;red&#x27;</span>,<span class="string">&#x27;green&#x27;</span>,<span class="string">&#x27;blue&#x27;</span>]</span><br><span class="line"><span class="keyword">let</span> colors2 = colors.concat(<span class="string">&#x27;yellow&#x27;</span>,[<span class="string">&#x27;black&#x27;</span>,<span class="string">&#x27;brown&#x27;</span>])</span><br><span class="line"><span class="built_in">console</span>.log(colors) <span class="comment">// [&#x27;red&#x27;,&#x27;green&#x27;,&#x27;blue&#x27;]</span></span><br><span class="line"><span class="built_in">console</span>.log(colors2) <span class="comment">// [&#x27;red&#x27;,&#x27;green&#x27;,&#x27;blue&#x27;,&#x27;yellow&#x27;,&#x27;black&#x27;,&#x27;brown&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>以上例子中，concat() 参数 <code>[&#39;black&#39;,&#39;brown&#39;]</code> 被 “打平” 了。打平数组参数的行为可以重写，方法是在参数数组上指定一个特殊的符号：<code>Symbol.isConcatSpreadable</code>。这个符号接收布尔值，true 为强制打平（包括类数组对象），false 为阻止打平</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>]</span><br><span class="line"><span class="keyword">let</span> newColors = [<span class="string">&#x27;black&#x27;</span>, <span class="string">&#x27;brown&#x27;</span>]</span><br><span class="line"><span class="keyword">let</span> moreNewColors = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.isConcatSpreadable]: <span class="literal">true</span>,</span><br><span class="line">  length: <span class="number">2</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="string">&#x27;pink&#x27;</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">&#x27;cyan&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">newColors[<span class="built_in">Symbol</span>.isConcatSpreadable] = <span class="literal">false</span></span><br><span class="line"><span class="comment">// 不打平</span></span><br><span class="line"><span class="keyword">let</span> colors2 = colors.concat(<span class="string">&#x27;yellow&#x27;</span>, newColors)</span><br><span class="line"><span class="comment">// 打平</span></span><br><span class="line"><span class="keyword">let</span> colors3 = colors.concat(moreNewColors)</span><br><span class="line"><span class="built_in">console</span>.log(colors2); [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;yellow&#x27;</span>,[<span class="string">&#x27;black&#x27;</span>,<span class="string">&#x27;brown&#x27;</span>]]</span><br><span class="line"><span class="built_in">console</span>.log(colors3); [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;pink&#x27;</span>, <span class="string">&#x27;cyan&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>splice()</code><br>返回值：<br>被删除的元素（如果没有删除元素，则返回空数组）。会改变原始数组</p>
+<h3 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h3><p><code>reduce()</code> &amp; <code>reduceRight()</code></p>
+<blockquote>
+<p>reduce() 方法从数组第一项开始遍历到最后一项；reduceRight() 是从最后一项开始遍历至第一项</p>
+</blockquote>
+<p>参数：<br>1、每一项都会运行的归并函数。该函数接收4个参数：<br>    1、上一个归并值<br>    2、当前项<br>    3、当前项的索引<br>    4、数组本身<br>2、归并起点的初始值</p>
+<p>如果提供归并值，则第一次迭代会以数组的第一项作为归并值，第二项作为当前项</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> values = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">let</span> sum = values.reduce(<span class="function">(<span class="params">prev, cur, index, array</span>) =&gt;</span> prev + cur) <span class="comment">// 加法求和</span></span><br><span class="line"><span class="built_in">console</span>.log(sum) <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="定型数组"><a href="#定型数组" class="headerlink" title="定型数组"></a>定型数组</h2><p>定型数组（typed array）是 ECMAScript 新增的结构，目的是提升向原生库传输数据的效率。实际上，JavaScript 并没有 “TypeArray” 类型，它所指的其实是一种特殊的包含数值类型的数组</p>
+<h3 id="ArrayBuffer"><a href="#ArrayBuffer" class="headerlink" title="ArrayBuffer"></a>ArrayBuffer</h3><blockquote>
+<p>ArrayBuffer 是所有定型数组及视图引用的基本单位</p>
+</blockquote>
+<p><code>ArrayBuffer()</code> 是一个普通的 JavaScript 构造函数，可用于在内存中分配特性数量的字节空间</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">16</span>) <span class="comment">// 在内存中分配16字节</span></span><br><span class="line">alert(buf.byteLength) <span class="comment">// 16</span></span><br></pre></td></tr></table></figure>
+
+<p>ArrayBuffer 一经创建就不能再调整大小。不过，可以使用 slice() 复制其全部或部分到一个新实例中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf1 = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">16</span>)</span><br><span class="line"><span class="keyword">const</span> buf2 = buf1.slice(<span class="number">4</span>,<span class="number">12</span>)</span><br><span class="line">alert(buf2.byteLength) <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ArrayBuffer 在分配失败时会抛出错误</li>
+<li>ArrayBuffer 分配的内存不能超过 Number.MAX_SAFE_INTEGER(2^^53-1) 字节</li>
+<li>声明 ArrayBuffer 会将所有二进制位初始化位 0</li>
+<li>通过声明 ArrayBuffer 分配的堆内存可以被当成垃圾回收，不用手动释放</li>
+</ul>
+<p>不能仅通过对 ArrayBuffer 的引用就读取或写入其内容。要读取或写入 ArrayBuffer，就必须通过视图。视图有不同的类型，但引用的都是 ArrayBuffer 中存储的二进制数据</p>
+<h3 id="DateView"><a href="#DateView" class="headerlink" title="DateView"></a>DateView</h3><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><blockquote>
+<p>Map 是 ES6 新增的一种集合类型，为 JavaScript 带来了真正的键/值存储机制</p>
+</blockquote>
+<h3 id="基本API"><a href="#基本API" class="headerlink" title="基本API"></a>基本API</h3><h3 id="顺序与迭代"><a href="#顺序与迭代" class="headerlink" title="顺序与迭代"></a>顺序与迭代</h3><h3 id="选择-Object-还是-Map"><a href="#选择-Object-还是-Map" class="headerlink" title="选择 Object 还是 Map"></a>选择 Object 还是 Map</h3><h2 id="迭代与扩展操作符"><a href="#迭代与扩展操作符" class="headerlink" title="迭代与扩展操作符"></a>迭代与扩展操作符</h2></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/%E9%AB%98%E7%A8%8B4%E7%AC%94%E8%AE%B0/">高程4笔记</a></div><div class="post_share"><div class="social-share" data-image="https://smnarnold.com/assets/page-previews/js.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/javascript/gc4-8/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/class.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第八章 对象、类与面向对象编程</div></div></a></div><div class="next-post pull-right"><a href="/javascript/gc4-5/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第五章 基本引用类型</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/javascript/gc4-10/" title="第十章 函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/function_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-30</div><div class="title">第十章 函数</div></div></a></div><div><a href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-04</div><div class="title">第二十章 JavaScript API</div></div></a></div><div><a href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-17</div><div class="title">第十一章 Promise 与异步函数</div></div></a></div><div><a href="/javascript/gc4-3/" title="第三章 语言基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tse4-mm.cn.bing.net/th/id/OIP-C.XWBsXhnwMY9IVyo8j8yDOAHaEK?pid=ImgDet&rs=1" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第三章 语言基础</div></div></a></div><div><a href="/javascript/gc4-4/" title="第四章 变量、作用域与内存"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F1015%252F0f63ea96j00r10a7f000hc000hs00a0g.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1642295342&t=1541235e44283cd50dc0888b18d1a3dc" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第四章 变量、作用域与内存</div></div></a></div><div><a href="/javascript/gc4-5/" title="第五章 基本引用类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://smnarnold.com/assets/page-previews/js.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-15</div><div class="title">第五章 基本引用类型</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">郭伟杰</div><div class="author-info__description">尽吾志也而不能至者，可以无悔矣</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">36</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/guo-weijie"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/guo-weijie" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:weijie.g@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">少壮不努力，老大徒伤悲 <br /> 君何必言利，亦有仁义焉 <br /> 一切古代史都是当代史 <br /> 每天进步一点点</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Array"><span class="toc-number">1.</span> <span class="toc-text">Array</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.</span> <span class="toc-text">创建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%A9%BA%E4%BD%8D"><span class="toc-number">1.2.</span> <span class="toc-text">数组空位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E5%92%8C%E5%A1%AB%E5%85%85%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">复制和填充方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">排序方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.</span> <span class="toc-text">操作方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%92%E5%B9%B6%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.</span> <span class="toc-text">归并方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E5%9E%8B%E6%95%B0%E7%BB%84"><span class="toc-number">2.</span> <span class="toc-text">定型数组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayBuffer"><span class="toc-number">2.1.</span> <span class="toc-text">ArrayBuffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DateView"><span class="toc-number">2.2.</span> <span class="toc-text">DateView</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">3.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%ACAPI"><span class="toc-number">3.1.</span> <span class="toc-text">基本API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E4%B8%8E%E8%BF%AD%E4%BB%A3"><span class="toc-number">3.2.</span> <span class="toc-text">顺序与迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9-Object-%E8%BF%98%E6%98%AF-Map"><span class="toc-number">3.3.</span> <span class="toc-text">选择 Object 还是 Map</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E4%B8%8E%E6%89%A9%E5%B1%95%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">迭代与扩展操作符</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/javascript/array/" title="Array 常用方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Array 常用方法"/></a><div class="content"><a class="title" href="/javascript/array/" title="Array 常用方法">Array 常用方法</a><time datetime="2023-03-13T12:20:11.320Z" title="更新于 2023-03-13 20:20:11">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/babble/" title="呓语"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/babble_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="呓语"/></a><div class="content"><a class="title" href="/gossip/babble/" title="呓语">呓语</a><time datetime="2023-03-13T11:48:10.636Z" title="更新于 2023-03-13 19:48:10">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gossip/xm1014/" title="XM1014"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XM1014"/></a><div class="content"><a class="title" href="/gossip/xm1014/" title="XM1014">XM1014</a><time datetime="2023-02-19T04:21:11.129Z" title="更新于 2023-02-19 12:21:11">2023-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/top_default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第十一章 Promise 与异步函数"/></a><div class="content"><a class="title" href="/javascript/gc4-11/" title="第十一章 Promise 与异步函数">第十一章 Promise 与异步函数</a><time datetime="2022-12-01T03:28:18.389Z" title="更新于 2022-12-01 11:28:18">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/javascript/gc4-20/" title="第二十章 JavaScript API"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/images/javascriptApi_cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第二十章 JavaScript API"/></a><div class="content"><a class="title" href="/javascript/gc4-20/" title="第二十章 JavaScript API">第二十章 JavaScript API</a><time datetime="2022-11-25T07:03:09.639Z" title="更新于 2022-11-25 15:03:09">2022-11-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 郭伟杰</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href='https://cn.keep-silence.com'>国内访问</a>  <a href='https://keep-silence.com'>国外访问</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://fastly.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://fastly.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '7b4f59d781f410b781cd',
+      clientSecret: '9ec6c6aaee7eee19fd3a6b3ef0d3d2998a624e00',
+      repo: 'ghosie',
+      owner: 'guo-weijie',
+      admin: ['guo-weijie'],
+      id: '4465c5ac6b35c24138b17426cd14e62b',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://fastly.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

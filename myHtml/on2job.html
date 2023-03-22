@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>再不努力工作 老板今年的法拉利就没了</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Microsoft YaHei';
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      background-color: #4579F3;
+      color: #fff;
+      position: relative;
+    }
+
+    .public {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .updateNow {
+      top: calc(50% - 70px);
+    }
+
+    .dontClose {
+      top: calc(50% - 40px);
+    }
+
+    .footerText {
+      bottom: 16%;
+    }
+
+    .loading i {
+      margin: auto;
+      position: absolute;
+      top: calc(50% - 140px);
+      left: 0;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      display: block;
+    }
+
+    .loading span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+
+    .loading span:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .loading span:nth-child(1) {
+      animation: i1 5.5s 0.2s infinite;
+    }
+
+    .loading span:nth-child(2) {
+      animation: i2 5.5s 0.4s infinite;
+    }
+
+    .loading span:nth-child(3) {
+      animation: i3 5.5s 0.6s infinite;
+    }
+
+    .loading span:nth-child(4) {
+      animation: i4 5.5s 0.8s infinite;
+    }
+
+    .loading span:nth-child(5) {
+      animation: i5 5.5s 1s infinite;
+    }
+
+    .loading span:nth-child(6) {
+      animation: i6 5.5s 1.2s infinite;
+    }
+
+    @keyframes i1 {
+      0% {
+        opacity: 1;
+        transform: rotate(190deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(920deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(930deg);
+      }
+    }
+
+    @keyframes i2 {
+      0% {
+        opacity: 1;
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(910deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(920deg);
+      }
+    }
+
+    @keyframes i3 {
+      0% {
+        opacity: 1;
+        transform: rotate(170deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(900deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(910deg);
+      }
+    }
+
+    @keyframes i4 {
+      0% {
+        opacity: 1;
+        transform: rotate(160deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(890deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(900deg);
+      }
+    }
+
+    @keyframes i5 {
+      0% {
+        opacity: 1;
+        transform: rotate(150deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(880deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(880deg);
+      }
+    }
+
+    @keyframes i6 {
+      0% {
+        opacity: 1;
+        transform: rotate(140deg);
+        animation-timing-function: cubic-bezier(0.29, 0.44, 0.32, 0.74);
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+      }
+
+      30% {
+        opacity: 1;
+        transform: rotate(450deg);
+        animation-timing-function: cubic-bezier(0.53, 0.27, 0.37, 0.81);
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+      }
+
+      63% {
+        opacity: 1;
+        transform: rotate(800deg);
+        animation-timing-function: cubic-bezier(0.5, 0.32, 0.82, 0.54);
+      }
+
+      68% {
+        opacity: 1;
+        transform: rotate(870deg);
+        animation-timing-function: ease-in;
+      }
+
+      69% {
+        opacity: 0;
+        transform: rotate(880deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <!-- 转圈 -->
+    <div class="loading">
+      <i>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </i>
+    </div>
+    <div class="public updateNow">正在进行更新 <span id="progress">0%</span></div>
+    <div class="public dontClose">请不要关闭电脑。完成此操作需要一定时间。</div>
+    <div class="public footerText">你的电脑将重启若干次。</div>
+  </div>
+
+  <script>
+    let progress = document.querySelector('#progress'),
+      step = 1, // 单位：s。进度每次更新间隔
+      num = 0; // 当前进度
+
+    ~function time() {
+      let timer = setInterval(() => {
+        num += getNum(2, 15)
+        if (num >= 100) {
+          num = 0
+        }
+        progress.innerText = num + '%'
+        clearInterval(timer)
+        step = getNum(5, 100)
+        time()
+      }, step * 1000);
+    }()
+
+    // 生成一个 val1 到 val2 之间的随机整数
+    function getNum(val1, val2) {
+      return Math.floor(Math.random() * (val2 - val1) + val1)
+    }
+  </script>
+</body>
+
+</html>
