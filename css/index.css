@@ -1366,10 +1366,6 @@ canvas:not(#ribbon-canvas),
   --headline-presudo: #a0a0a0;
   --scrollbar-color: #49b1f5;
 }
-@font-face {
-  font-family: HanYi;
-  src: local('华文新魏'), local('华文行楷'), url("/font/HanYiWeiBeiJian.ttf");
-}
 body {
   position: relative;
   min-height: 100%;
@@ -1503,9 +1499,6 @@ a {
 }
 a:hover {
   color: #49b1f5;
-}
-#site-subtitle {
-  font-family: HanYi;
 }
 .is-center {
   text-align: center;
