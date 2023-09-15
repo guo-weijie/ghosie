@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://keep-silence.com/others/nodejsNote/</loc>
-    <lastmod>2023-09-12</lastmod>
+    <lastmod>2023-09-15</lastmod>
   </url>
   <url>
     <loc>https://keep-silence.com/javascript/array/</loc>
@@ -61,10 +61,6 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/css/css/</loc>
-    <lastmod>2023-03-20</lastmod>
-  </url>
-  <url>
     <loc>https://keep-silence.com/css/nth/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
@@ -81,11 +77,7 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/others/git/</loc>
-    <lastmod>2023-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://keep-silence.com/others/electric/</loc>
+    <loc>https://keep-silence.com/css/css/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
@@ -105,7 +97,7 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/gossip/unknow/</loc>
+    <loc>https://keep-silence.com/gossip/xm1014/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
@@ -113,7 +105,7 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/gossip/xm1014/</loc>
+    <loc>https://keep-silence.com/gossip/unknow/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
@@ -121,15 +113,7 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/javascript/gc4-11/</loc>
-    <lastmod>2023-03-20</lastmod>
-  </url>
-  <url>
     <loc>https://keep-silence.com/javascript/gc4-20/</loc>
-    <lastmod>2023-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://keep-silence.com/javascript/gc4-4/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
@@ -137,7 +121,7 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/javascript/gc4-5/</loc>
+    <loc>https://keep-silence.com/javascript/gc4-4/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
@@ -149,11 +133,27 @@
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/javascript/gc4-8/</loc>
+    <loc>https://keep-silence.com/javascript/gc4-11/</loc>
+    <lastmod>2023-03-20</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/javascript/gc4-5/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
     <loc>https://keep-silence.com/javascript/operatorPrecedence/</loc>
+    <lastmod>2023-03-20</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/javascript/gc4-8/</loc>
+    <lastmod>2023-03-20</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/others/git/</loc>
+    <lastmod>2023-03-20</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/others/electric/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
 </urlset> 
