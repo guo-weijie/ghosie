@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keep-silence.com/node/multiVersionNode/</loc>
+    <lastmod>2024-01-13</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/gossip/babble/</loc>
+    <lastmod>2024-01-04</lastmod>
+  </url>
+  <url>
     <loc>https://keep-silence.com/javascript/gc4-3/</loc>
     <lastmod>2023-12-26</lastmod>
   </url>
@@ -49,16 +57,8 @@
     <lastmod>2023-12-13</lastmod>
   </url>
   <url>
-    <loc>https://keep-silence.com/node/multiVersionNode/</loc>
-    <lastmod>2023-12-13</lastmod>
-  </url>
-  <url>
     <loc>https://keep-silence.com/javascript/gc4-5/</loc>
     <lastmod>2023-12-04</lastmod>
-  </url>
-  <url>
-    <loc>https://keep-silence.com/gossip/babble/</loc>
-    <lastmod>2023-11-30</lastmod>
   </url>
   <url>
     <loc>https://keep-silence.com/javascript/array/</loc>
