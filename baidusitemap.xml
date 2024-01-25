@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://keep-silence.com/javascript/gc4-20/</loc>
+    <lastmod>2024-01-25</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/gossip/leisureFun/</loc>
+    <lastmod>2024-01-19</lastmod>
+  </url>
+  <url>
+    <loc>https://keep-silence.com/hello-world/</loc>
+    <lastmod>2024-01-19</lastmod>
+  </url>
+  <url>
     <loc>https://keep-silence.com/node/multiVersionNode/</loc>
     <lastmod>2024-01-13</lastmod>
   </url>
@@ -35,10 +47,6 @@
   <url>
     <loc>https://keep-silence.com/gossip/twilight/</loc>
     <lastmod>2023-12-19</lastmod>
-  </url>
-  <url>
-    <loc>https://keep-silence.com/javascript/gc4-20/</loc>
-    <lastmod>2023-12-18</lastmod>
   </url>
   <url>
     <loc>https://keep-silence.com/others/electric/</loc>
@@ -82,10 +90,6 @@
   </url>
   <url>
     <loc>https://keep-silence.com/others/uni-app/</loc>
-    <lastmod>2023-03-20</lastmod>
-  </url>
-  <url>
-    <loc>https://keep-silence.com/hello-world/</loc>
     <lastmod>2023-03-20</lastmod>
   </url>
   <url>
